@@ -1,0 +1,23 @@
+class Solution {
+     public int[] constructRectangle(int area) {
+         int[] a=new int[2];
+		 int i=(int)Math.sqrt(area);
+		
+		 for(;i>0;i--){
+			 if(area%i==0){
+                 
+                 if(i>=(area/i)){
+                    a[0]=i;
+				    a[1]=area/i; 
+                 }
+                 else{
+                      a[0]=area/i;
+				      a[1]=i; 
+                 }
+				 break;
+			 }
+		 }
+		return a;
+	        
+	    }
+}

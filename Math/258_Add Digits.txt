@@ -1,0 +1,46 @@
+
+/**
+ * 
+ */
+
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+	 public int addDigits(int num) {
+		 int sum=0;
+		 if(num<10)
+			 return num;
+		 else{
+			 while(num>0){
+		        	sum+=num%10;
+		        	num=num/10;
+		        }
+			return this.addDigits(sum);
+		 }
+	        
+	        
+	    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		int a=38;
+		System.out.println(t.addDigits(a));
+		
+		
+
+	}
+
+}

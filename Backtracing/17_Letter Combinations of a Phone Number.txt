@@ -1,0 +1,60 @@
+class Solution {
+    
+    Map<Character,List<Character>> m;
+    List<String> list;
+    StringBuffer sb;
+    public List<String> letterCombinations(String digits) {
+        
+        m=new HashMap<Character,List<Character>>();
+        m.put('1',new ArrayList<Character>());                              //数字1不表示任何字母
+        m.put('2',Arrays.asList(new Character[]{'a','b','c'}));
+        m.put('3',Arrays.asList(new Character[]{'d','e','f'}));
+        m.put('4',Arrays.asList(new Character[]{'g','h','i'}));
+        m.put('5',Arrays.asList(new Character[]{'j','k','l'}));
+        m.put('6',Arrays.asList(new Character[]{'m','n','o'}));
+        m.put('7',Arrays.asList(new Character[]{'p','q','r','s'}));
+        m.put('8',Arrays.asList(new Character[]{'t','u','v'}));
+        m.put('9',Arrays.asList(new Character[]{'w','x','y','z'}));
+        
+        list = new ArrayList<String>();
+         sb= new StringBuffer();
+        if(digits.length()==0)
+            return list;
+        for(int i=0;i<digits.length();i++){
+            
+            
+            if(digits.charAt(i)=='0')
+                continue;
+            
+        }
+        
+        check(0,digits.length(),digits);
+        
+        
+        
+       return list; 
+    }
+    
+    
+    private void check(int i,int n,String s){
+    
+    if(i==n){
+        
+        list.add(sb.toString());
+        return;
+        
+    }
+    for(int j=0;j<m.get(s.charAt(i)).size();j++){
+        
+        sb.append(m.get(s.charAt(i)).get(j));
+        
+        check(i+1,n,s);
+        
+        sb.deleteCharAt(sb.length()-1);
+    }
+}
+
+
+
+    
+}

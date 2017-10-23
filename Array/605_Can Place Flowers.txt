@@ -1,0 +1,51 @@
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        if(n==0)
+            return true;
+		 int count=0;
+	        for(int i=0;i<flowerbed.length;i++){
+	        	while(i<flowerbed.length&&flowerbed[i]==0){
+	        		count++;
+	        		if(i==0)
+	        			count++;
+                   if(i==flowerbed.length-1)
+	        			count++;
+	        		i++;
+	        	}
+	        	if(count>0){
+	        		n=n-(count-1)/2;
+	        		if(n<=0)
+	        			return true;
+		        	count=0;
+	        	}
+	        	
+	        }
+	       return false;
+	    }
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		
+		int[] nums={1,0,0,0,1,1,0,0};
+		
+		System.out.println(t.canPlaceFlowers(nums,2));
+	
+	
+		
+
+	}
+
+}

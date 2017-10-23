@@ -1,0 +1,43 @@
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void moveZeroes(int[] nums) {
+	    int i=0;
+	    int j=0;
+        for(;i<nums.length;i++){
+        	if(nums[i]!=0){
+                if(i!=j){              //防止i和j相同，下面把自己赋值为0
+                    nums[j]=nums[i];
+        		    nums[i]=0;//这个地方容易出错
+        		
+                }
+        		j++;
+        	}
+        	
+        }
+        
+    }
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		
+		int[] nums={0, 1, 0, 3, 12};
+		t.moveZeroes(nums);
+		System.out.println(nums);
+	
+	
+
+	}
+
+}

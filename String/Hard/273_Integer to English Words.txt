@@ -1,0 +1,103 @@
+class Solution {
+    public String numberToWords(int num) {
+        if(num==0)
+            return "Zero";
+        int count=0;
+        
+        StringBuffer sb = new StringBuffer();
+        
+        while(num/1000!=0){
+            
+           count++;
+        
+           con_str(num%1000,count,sb);
+            
+           if(num/1000%1000!=0){              //防止1000 000  如果能整除，后面的thousand就不能要了
+                
+            if(count==1)
+                sb.insert(0," Thousand");
+            if(count==2)
+                sb.insert(0," Million");
+            if(count==3)
+                sb.insert(0," Billion");
+                
+            }
+           
+           
+            num=num/1000;
+        }
+        
+         con_str(num,count,sb);
+        return sb.toString().trim();
+    }
+    private void con_str(int i,int c,StringBuffer sb){
+        
+          int bai=i/100;
+          int shi=i%100/10;
+        
+          if(shi==1){
+             sb.insert(0," "+get_str(i%100)); 
+          }
+         else {
+             int ge=i%10;
+             
+             if(ge!=0){
+                 sb.insert(0," "+get_ge_str(ge));
+             }
+             
+             if(shi!=0){
+                 sb.insert(0," "+get_shi_str(shi));
+             }
+             
+         }
+         if(bai!=0){
+              sb.insert(0," Hundred");
+             sb.insert(0," "+get_ge_str(bai));
+         }
+          
+    }
+    private String get_str(int i){
+        switch(i){
+            case 10: return "Ten";          
+            case 11: return "Eleven";
+            case 12: return "Twelve";
+            case 13: return "Thirteen";
+            case 14: return "Fourteen";
+            case 15: return "Fifteen";
+            case 16: return "Sixteen";
+            case 17: return "Seventeen";
+            case 18: return "Eighteen";
+            case 19: return "Nineteen";
+            default:return "";
+        }
+    }
+    private String get_ge_str(int i){
+        switch(i){
+            case 1: return "One";
+            case 2: return "Two";
+            case 3: return "Three";
+            case 4: return "Four";
+            case 5: return "Five";
+            case 6: return "Six";
+            case 7: return "Seven";
+            case 8: return "Eight";
+            case 9: return "Nine";
+            default:return "";
+        }
+    }
+    
+    private String get_shi_str(int i){
+        switch(i){
+            case 2: return "Twenty";
+            case 3: return "Thirty";
+            case 4: return "Forty";
+            case 5: return "Fifty";
+            case 6: return "Sixty";
+            case 7: return "Seventy";
+            case 8: return "Eighty";
+            case 9: return "Ninety";      
+            default:return "";   
+        }
+        
+    }
+}

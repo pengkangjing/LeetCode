@@ -1,0 +1,38 @@
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+public int maximumProduct(int[] nums) {
+        
+	    Arrays.sort(nums);
+        System.out.println(nums[0]);
+        int i=nums.length-1;
+        if(nums[i]<=0)
+        	return nums[i]*nums[i-1]*nums[i-2];
+        else if(nums[i-1]<=0)
+        	return nums[i]*nums[1]*nums[0];
+        else if(nums[i-2]<=0)
+        	return nums[i]*nums[1]*nums[0];
+        else return nums[i]*nums[i-1]*nums[i-2]>=nums[i]*nums[1]*nums[0]?nums[i]*nums[i-1]*nums[i-2]:nums[i]*nums[1]*nums[0];
+        	
+    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		int[] nums=new int[]{3,1,2,6};
+		System.out.println(t.maximumProduct(nums));
+		
+		
+		
+
+	}
+
+}

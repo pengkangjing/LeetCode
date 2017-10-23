@@ -1,0 +1,43 @@
+import java.util.Stack;
+
+public class Solution {
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+public boolean isValid(String s) {
+		Stack<Character> p=new Stack<Character>();
+		
+		char c;
+	    int i;
+        if(s.length()%2!=0)
+        	return false;
+        for(i=0;i<s.length();i++)
+        {
+        	c=s.charAt(i);
+        	switch(c){
+        	case '(':
+        	case '[':
+        	case '{': p.add(c);
+        	          break;
+        	case ')':
+        	case ']':
+        	case '}':if(p.isEmpty()||Math.abs((c-p.pop()))>2)
+        		        return false;
+        	         break;
+        	
+        		
+        	
+        	}
+        }
+        		
+   	public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			String l="{{)}";
+			Solution m=new Solution();
+			System.out.println(m.isValid(l));
+		}
+}
+     	
+       return p.isEmpty(); 
+    }

@@ -1,0 +1,54 @@
+class Solution {
+    
+    int total;
+	int[] Q 	;
+    
+    public int totalNQueens(int n) {
+	
+	Q= new int[n];
+    
+	check(0,n);
+	
+ 
+	return total;
+    }
+    
+    
+    private void check(int i,int n) {
+        
+		if(i==n){
+            total++;
+			return;
+		}
+		
+		for(int j=0;j<n;j++){
+    		Q[i]=j;
+    		if(judge(i)){                                 //这里的if用来判断约束条件；
+                
+    			
+                
+        		check(i+1,n);
+                
+                
+        	}
+    		
+    		
+    	}
+		
+	}
+
+	private boolean judge(int i) {
+        
+		for(int j=0;j<i;j++){
+			if((Q[j]==Q[i])||(Math.abs(Q[j]-Q[i])==Math.abs(j-i)))
+				return false;
+		}
+		return true;
+	}
+
+   
+}
+
+
+
+

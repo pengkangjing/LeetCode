@@ -1,0 +1,46 @@
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
+public int[] twoSum(int[] numbers, int target) {
+	
+			int [] a=new int [2];
+			int i=0;
+			int j=numbers.length-1;
+            for(;i<j;){
+            	if(numbers[i]+numbers[j]<target){
+            		i++;
+            	}
+            	else if(numbers[i]+numbers[j]>target){
+            		j--;
+            	}
+            	else {
+            		a[0]=i+1;
+                    a[1]=j+1;
+                    break;
+            	}
+            }  
+            
+            
+            return a;
+	
+    }
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		int[] nums={2, 7, 11, 15};		
+		System.out.println(t.twoSum(nums,9));
+	
+	}
+
+}

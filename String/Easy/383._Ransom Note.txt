@@ -1,0 +1,45 @@
+public class Solution {
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean canConstruct(String ransomNote, String magazine) {
+		 int i,j;
+		 boolean[] mark = new boolean[magazine.length()];
+        if(magazine.length()==0&&ransomNote.length()==0)
+            return true;
+        else if(magazine.length()==0)
+            return false;
+		 
+		 for(i=0;i<ransomNote.length();i++){
+			 
+			 for(j=0;j<magazine.length();j++){
+				 
+				 if(!mark[j]&&ransomNote.charAt(i)==magazine.charAt(j)){
+					 mark[j]=true;
+				     break;
+					 
+				 }
+				 
+				 if(j==magazine.length()-1){
+					 return false;
+				 }
+					
+					 
+			 }
+			 
+		 }
+		 return true;
+		    
+	    }
+
+	   
+	public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			String l="aa";
+			String k="aab";
+			Solution m=new Solution();
+			System.out.println(m.canConstruct(l,k));
+		}
+}

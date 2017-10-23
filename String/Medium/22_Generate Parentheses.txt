@@ -1,0 +1,22 @@
+class Solution {
+    
+   List<String> result = new ArrayList<String>();
+   public List<String> generateParenthesis(int n) {
+    
+	check(0,0,n,"");
+	return result;
+    }
+    private void check(int left,int right,int n,String s){
+        if((left==n)&&(right==n))
+              result.add(s);
+        if(left<n){
+            check(left+1,right,n,s+"(");
+        }
+        
+        if(right<left){
+             check(left,right+1,n,s+")");
+        }
+             
+    }
+}
+    

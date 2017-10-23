@@ -1,0 +1,36 @@
+class Solution {
+    private    int max_area;
+    public int maxAreaOfIsland(int[][] grid) {
+         max_area=0;
+        int max=0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==1){
+                    System.out.println(i+"   "+j);
+                    dfs(i,j,grid);
+                    if(max_area>max)
+                        max=max_area;
+                    max_area=0;
+                }
+                
+                
+            }
+        }
+        return max;
+
+    }
+    private void dfs(int i,int j,int[][] grid){
+        grid[i][j]=0;                              //关键点，要把该点置为0，防止重复计算
+        max_area++;
+        if((i>0)&&(grid[i-1][j]==1))
+            dfs(i-1,j,grid);
+        if((j>0)&&(grid[i][j-1]==1))
+            dfs(i,j-1,grid);
+        if((i<(grid.length-1))&&(grid[i+1][j]==1)) 
+            dfs(i+1,j,grid);    
+        if((j<(grid[0].length-1))&&(grid[i][j+1]==1))
+              dfs(i,j+1,grid);
+        
+    }
+    
+}

@@ -1,0 +1,126 @@
+import java.util.Stack;
+
+
+public class Solution {
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+/*int i;
+		String S;
+		 public int calculate(String s) {
+		        s=s.replaceAll(" ", "");
+		        S=s;
+		        int result=0;
+		        boolean flag=true;
+		        Stack<Integer> num=new Stack<Integer>();
+		        for(i=0;i<s.length();i++){
+		        	
+		        	if(s.charAt(i)=='*')
+		        	{
+		        	   num.push(num.pop()*getnum());
+		        	}
+		        		
+		            else if(s.charAt(i)=='/')
+		            {
+		            	num.push(num.pop()/getnum());
+		        	    
+		            }
+		        		
+		        	else if(s.charAt(i)=='+')
+		        		 flag=true;
+		        	
+		        	else if(s.charAt(i)=='-')
+		        		 flag=false;
+		        	else  
+		        	{     
+		        		  if(flag)
+	                      {
+		        			  i--;
+		        			  num.push(getnum());
+		        		  }
+		        		  else 
+	                      
+	                      {  i--;
+		        			  num.push(-getnum());
+		        			  flag=true;
+		        		  }
+		        	           
+		        	}
+		        	
+		        }
+		        for(int j:num)
+	            {
+	             result+=j;
+	            }
+		       
+		        return result;
+		        
+		    }
+	private int getnum() {
+	    i++;
+		int d=0;
+		while(i<S.length()&&Character.isDigit(S.charAt(i)))
+		{
+			d=d*10+Character.getNumericValue(S.charAt(i));
+		    i++;
+		}
+		    i--;
+			return d;
+		}
+*/
+//上面是之前自己写的，下面那个是参考别人的
+public int calculate(String s) {
+	        s=s.replaceAll(" ", "");
+	        if(s==null||s.length()==0)
+	        	return 0;
+	        int result=0;
+	        int num=0;
+	        int i;
+	        char  sign='+';
+	        Stack<Integer> stack=new Stack<Integer>();
+	        for(i=0;i<s.length();i++){
+	        	if(Character.isDigit(s.charAt(i)))
+	        	{
+	        		num=num*10+Character.getNumericValue(s.charAt(i));
+	        	}
+	        	if(!Character.isDigit(s.charAt(i))||i==s.length()-1)
+	        	{
+	        		if(sign=='+')
+	        		{
+	        			stack.push(num);
+	        	    }
+		        	if(sign=='-')
+	        		{
+	        			stack.push(-num);
+	        	    }
+			        if(sign=='*')
+		    		{
+		    			stack.push(stack.pop()*num);
+		    	    }
+	                if(sign=='/')
+		    		{
+		    			stack.push(stack.pop()/num);
+		    	    }
+	                sign=s.charAt(i);
+	                num=0;
+	                
+	         }
+	        	
+	       
+	        }
+	        for(int j :stack)
+	        {
+	        	result+=j;
+	        }
+	        
+	        return result;
+	        	
+	        }
+public static void main(String[] args) {
+	// TODO Auto-generated method stub
+	String l=" 1-1+1";
+	Solution m=new Solution();
+	System.out.println(m.calculate(l));
+}
+}

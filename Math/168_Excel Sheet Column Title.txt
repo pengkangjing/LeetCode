@@ -1,0 +1,43 @@
+class Solution {
+    public String convertToTitle(int n) {
+	StringBuffer sb=new StringBuffer();
+       while((n-1)/26!=0){
+    	   int_to_str(sb,n-1);
+    	   n=(n-1)/26;
+    }
+       int_to_str(sb,n-1);
+      return sb.toString();
+	
+}
+	private void int_to_str(StringBuffer sb,int n) {
+	// TODO Auto-generated method stub
+		switch(n%26){
+	 	   case 0:sb.insert(0,'A');break;
+	 	   case 1:sb.insert(0,'B');break;
+	 	   case 2:sb.insert(0,'C');break;
+	 	   case 3:sb.insert(0,'D');break;
+	 	   case 4:sb.insert(0,'E');break;
+	 	   case 5:sb.insert(0,'F');break;
+	 	   case 6:sb.insert(0,'G');break;
+	 	   case 7:sb.insert(0,'H');break;
+	 	   case 8:sb.insert(0,'I');break;
+	 	   case 9:sb.insert(0,'J');break;
+	 	   case 10:sb.insert(0,'K');break;
+	 	   case 11:sb.insert(0,'L');break;
+	 	   case 12:sb.insert(0,'M');break;
+	 	   case 13:sb.insert(0,'N');break;
+	 	   case 14:sb.insert(0,'O');break;
+	 	   case 15:sb.insert(0,'P');break;
+	 	   case 16:sb.insert(0,'Q');break;
+	 	   case 17:sb.insert(0,'R');break;
+	 	   case 18:sb.insert(0,'S');break;
+	 	   case 19:sb.insert(0,'T');break;
+	 	   case 20:sb.insert(0,'U');break;
+	 	   case 21:sb.insert(0,'V');break;
+	 	   case 22:sb.insert(0,'W');break;
+	 	   case 23:sb.insert(0,'X');break;
+	 	   case 24:sb.insert(0,'Y');break;
+	 	   case 25:sb.insert(0,'Z');break;
+	 	   }
+}
+}

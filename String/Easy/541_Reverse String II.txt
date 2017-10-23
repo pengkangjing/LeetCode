@@ -1,0 +1,38 @@
+
+public class Solution {
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+	 public String reverseStr(String s, int k) {
+		 char[] a=s.toCharArray();
+		 int n=s.length();
+		 int i,j;
+		 for(i=0;i<n-1;i+=2*k){
+			 j=Math.min(i+k-1,n-1);
+			 swap(a,i,j);
+		 }
+	     return String.valueOf(a)  ; 
+	    }
+
+	private void swap(char[] a, int i, int j) {
+		// TODO Auto-generated method stub
+		char temp;
+		while(i<j){
+			temp=a[i];
+			a[i++]=a[j];
+			a[j--]=temp;
+			
+		}
+		
+				
+		
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String l="adfergewqwefga";
+		Solution m=new Solution();
+		System.out.println(m.reverseStr(l, 2));
+	}
+
+}

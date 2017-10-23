@@ -1,0 +1,48 @@
+class Solution {
+    public int climbStairs(int n) {
+        int a=1;
+        int b=1;
+        int temp=0;
+        for(int i=1;i<=n;i++){
+            temp=a;
+            a=b;
+            b=b+temp;
+        }
+        return a;
+    }
+  
+}
+
+//自己写的 使用了额外的空间
+/*
+public int climbStairs(int n) {
+        int[] result=new int[n];
+        for(int i=0;i<n;i++){
+            if((i==0)||(i==1))
+                result[i]=i+1;
+            else result[i]=result[i-1]+result[i-2];
+           
+        }
+       return result[n-1];
+    }
+*/
+//自己写的一个方法， 输入稍大就超时错误；
+/*
+ public int climbStairs(int n) {
+        if((n==1)||(n==2))
+            return n;
+        else return  climbStairs(n-1)+climbStairs(n-2);
+    }
+*/
+//这个有问题，答案都不对，得改一改，不过就算改对了也不能用 会超时
+/*  public int climbStairs(int n) {
+        int[] result=new int[n];
+        if((n==1)||(n==2))
+            return n;
+        if(result[n-2]==0)
+            result[n-2]=climbStairs(n-2);
+        if(result[n-1]==0)
+            climbStairs(n-1);
+       return result[n-1]+result[n-2];
+    }
+*/

@@ -1,0 +1,32 @@
+public class Solution {
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+public String complexNumberMultiply(String a, String b) {
+	    int multi_a,multi_b,am1,am2,bm1,bm2;
+	    String[] am=new String[2];
+	    String[] bm=new String[2];
+        am=a.split("\\+");
+        am1=Integer.parseInt(am[0]);
+        am2=Integer.parseInt(am[1].replaceAll("i", ""));
+        
+        bm=b.split("\\+");
+        bm1=Integer.parseInt(bm[0]);
+        bm2=Integer.parseInt(bm[1].replaceAll("i", ""));
+        
+        
+         multi_a=am1*bm1-am2*bm2;
+         multi_b=am1*bm2+am2*bm1;
+         return multi_a+"+"+multi_b+"i";
+    }
+
+	public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			String l="2+-1i";
+			String k="3+4i";
+			Solution m=new Solution();
+			//System.out.println();
+			System.out.println(m.complexNumberMultiply(l,k));
+		}
+}

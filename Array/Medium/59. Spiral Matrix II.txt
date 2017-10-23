@@ -1,0 +1,58 @@
+class Solution {
+    public int[][] generateMatrix(int n) {
+        
+        int[][] result = new int[n][n];                         
+        for(int s=0;s<n;s++){
+            for(int t=0;t<n;t++){
+                result[s][t]=0;                                        //初始化，全部置0，保证下面的控制一圈正确结束
+            }
+        }
+      
+        int q=n/2;                                                     //控制有几圈
+        int p=n%2;                                                    
+    
+        if(p!=0)
+            result[q][q]=n*n;                                            //奇数圈，最里面的一圈只有一个数字，填n*n
+        
+        int num=1;
+        for(int k=0;k<q;k++){
+            
+                int i=k;
+                int j=k;
+
+                for(;;){
+    
+                        if(result[i][j]!=0)                            //控制这一圈结束；
+                             break;
+            
+                        result[i][j]=num++;
+                       
+        
+                        if((i==k)&&(j<n-1-k)){                            //画圈 ，下面的if控制语句控制圈的走向
+
+                            j++;
+
+                        }
+                        else if((i<n-1-k)&&(j==n-1-k)){
+
+                            i++;
+                        }
+                       else if((i==n-1-k)&&(j>k)){
+
+                            j--;
+                        }
+                        else if((i>k)&&(j==k)){
+
+                            i--;
+                        }
+
+                     }
+            
+        }
+       
+        
+       
+        
+        return result;
+    }
+}

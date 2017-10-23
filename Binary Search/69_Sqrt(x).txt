@@ -1,0 +1,16 @@
+class Solution {
+    public int mySqrt(int x) {
+        if(x==0)
+            return 0;
+        int st=1;
+        int end=x;
+        int mid=st+(end-st)/2;
+        while(st<=end){
+            if(mid<=x/mid)//注意不能用mid*mid，因为会溢出，除非 把st end mid xlong 全设为long型 但是这样占用的空间变大了
+                st=mid+1;
+            else end=mid-1;
+            mid=st+(end-st)/2;
+        }
+        return st-1;
+    }
+}

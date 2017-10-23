@@ -1,0 +1,51 @@
+class Solution {
+    public int[][] imageSmoother(int[][] M) {
+        int[][] result = new int[M.length][M[0].length];
+        
+        for(int i=0;i<M.length;i++){
+            
+            for(int j=0;j<M[0].length;j++){
+                
+                int count=1;
+                int sum=M[i][j];
+                if((i>0)){
+                    count++;
+                    sum+=M[i-1][j];
+                    if(j>0){
+                        count++;
+                        sum+=M[i-1][j-1];
+                    }
+                     if(j<M[0].length-1){
+                        count++;
+                        sum+=M[i-1][j+1];
+                    }
+                }
+                if((i<M.length-1)){
+                    count++;
+                    sum+=M[i+1][j];
+                    if(j>0){
+                        count++;
+                        sum+=M[i+1][j-1];
+                    }
+                     if(j<M[0].length-1){
+                        count++;
+                        sum+=M[i+1][j+1];
+                    }
+                }
+                if(j>0){
+                    count++;
+                    sum+=M[i][j-1];
+                }
+                 if(j<M[0].length-1){
+                    count++;
+                    sum+=M[i][j+1];
+                }
+               
+                result[i][j]=(int)Math.floor((double)sum/count);
+                    
+                
+            }
+        }
+     return result;       
+    }
+}

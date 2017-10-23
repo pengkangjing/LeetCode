@@ -1,0 +1,15 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max=0;
+        for(int i=0;i<prices.length-1;i++){
+            if(prices[i+1]<=prices[i])       //这里可以跳过很多步，节省时间，没有这一句报超时错误
+                continue;                     //比如对目前的i来说 如果之后卖出得到收益，但是i+1时刻的买入价更低，如果i+1时刻买入之后某个时刻卖出可以获                                              //得更大的利润
+            for(int j=1+i;j<prices.length;j++){
+                if(prices[j]-prices[i]>max)
+                    max=prices[j]-prices[i];
+            }
+        }
+        return max;
+    }
+}
+

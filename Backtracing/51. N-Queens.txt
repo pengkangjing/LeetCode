@@ -1,0 +1,64 @@
+class Solution {
+    
+    List<List<String>> result=new ArrayList<List<String>>();
+	List<String>       solution=new ArrayList<String>();
+	int[] Q 	;
+    
+    public List<List<String>> solveNQueens(int n) {
+	
+	Q= new int[n];
+    
+	check(0,n);
+	
+ 
+	return result;
+    }
+    
+    
+    private void check(int i,int n) {
+        
+		if(i==n){
+            List<String>       temp=new ArrayList<String>();  //
+            temp.addAll(solution);                            // 这边重新new一个list 如果result直接添加solution的话，后面涉及到修改solution，因为
+			result.add(temp);                                 //solution是引用类型，会把result中已经添加的结果修改了。
+			return;
+		}
+		
+		for(int j=0;j<n;j++){
+    		Q[i]=j;
+    		if(judge(i)){                                 //这里的if用来判断约束条件；
+                
+    			StringBuffer sb = new StringBuffer();     //
+    			for(int k=0;k<n-1;k++){                   //
+    				sb.append(".");                       //这几行用来增加“......Q...”,先加入n-1点，再在j列插入Q
+    			}                                         //
+    			sb.insert(j, "Q");                        //
+    
+    		solution.add(sb.toString());
+                
+        		check(i+1,n);
+                
+            solution.remove(solution.size()-1);    //回溯，删除第i行第j列放置皇后，放到下一列
+                
+        	}
+    		
+    		
+    	}
+		
+	}
+
+	private boolean judge(int i) {
+        
+		for(int j=0;j<i;j++){
+			if((Q[j]==Q[i])||(Math.abs(Q[j]-Q[i])==Math.abs(j-i)))
+				return false;
+		}
+		return true;
+	}
+
+   
+}
+
+
+
+

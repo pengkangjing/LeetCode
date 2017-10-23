@@ -1,0 +1,27 @@
+class Solution {
+    public int findLHS(int[] nums) {
+        int len=0;
+        int j=0;
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            for(j=i+1;j<nums.length;){
+                
+                 if((nums[j]-nums[i])<=1){
+                    j++;
+                }
+                 else {
+                     if(((j-i)>len)&&((nums[j-1]-nums[i])==1))
+                         len=j-i;
+                     break;
+                    
+                 }
+            }
+            if(((j-i)>len)&&((nums[j-1]-nums[i])==1))
+                         len=j-i;
+            
+               
+            }
+         return len; 
+        }
+      
+    }

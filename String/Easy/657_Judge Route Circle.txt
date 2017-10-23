@@ -1,0 +1,39 @@
+//方法一
+class Solution {
+    public boolean judgeCircle(String moves) {
+        Map<Character,Integer> m=new HashMap<Character,Integer>();
+        for(int i=0;i<moves.length();i++){
+            if(m.containsKey(moves.charAt(i))){
+                m.put(moves.charAt(i),m.get(moves.charAt(i))+1);
+            }
+            else m.put(moves.charAt(i),1);
+        }
+        if((m.containsKey('U'))&&(!m.get('U').equals(m.get('D'))))
+            return false;
+        if((m.containsKey('L'))&&(!m.get('L').equals(m.get('R'))))
+            return false;
+        return true;
+        
+    }
+}
+
+//方法二
+class Solution {
+    public boolean judgeCircle(String moves) {
+        int count1=0;
+        int count2=0;
+       for(int i=0;i<moves.length();i++){
+           if(moves.charAt(i)=='U')
+               count1++;
+           if(moves.charAt(i)=='D')
+               count1--;
+           if(moves.charAt(i)=='L')
+               count2++;
+           if(moves.charAt(i)=='R')
+               count2--;
+       }
+        if((count1!=0)||(count2!=0))
+            return false;
+        else return true;
+    }
+}

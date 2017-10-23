@@ -1,0 +1,52 @@
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+           List<String>  result = new ArrayList<String>();
+           Map<String,Integer> m=new HashMap<String,Integer>();
+           for(int i=0;i<=s.length()-10;i++){
+               String str=s.substring(i,i+10);
+               if(m.containsKey(str)){
+                   if(m.get(str)==1)
+                       result.add(str);
+                   m.put(str,m.get(str)+1);
+               }
+                   
+               else m.put(str,1);
+           }
+           
+          
+        return result;
+    }
+}
+//hashmap查询速度快，用list超时
+/*
+ for(int i=0;i<=s.length()-10;i=i+1){
+               if(result.contains(s.substring(i,i+10)))
+                   continue;
+               for(int j=i+1;j<=s.length()-10;j++){
+                   
+                   if(result.contains(s.substring(j,j+10)))
+                   continue;
+                   
+                  if(s.substring(i,i+10).equals(s.substring(j,j+10))) {
+                      
+                      result.add(s.substring(i,i+10));
+                      break;
+                  }
+                   
+                   
+               }
+           }
+
+//
+for(int i=0;i<=s.length()-10;i++){
+               
+               String str=s.substring(i,i+10);
+               if(temp.contains(str)&&(!result.contains(str))){
+                   System.out.println(i); 
+                   result.add(str);
+               }
+                  
+               else temp.add(str);
+           }
+           
+*/

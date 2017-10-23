@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 
+ */
+
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+	public boolean checkPerfectNumber(int num) {
+	       if(num==1)
+	           return false;
+			List<Integer> div=new ArrayList<Integer>();
+			int num_add=0;
+	       
+			div.add(1);
+	        for(int i=2;i<=Math.sqrt(num);i++){
+	            if(num%i==0){
+	            	if(i==Math.sqrt(num))
+	            		div.add(i);
+	            	else{
+	            		div.add(i);
+	                	div.add(num/i);
+	            	}
+	            }
+	            
+	        }
+	        for(int j=0;j<div.size();j++)
+	        {
+	       	 num_add+=div.get(j);
+	        }
+	        System.out.println(num_add);
+	        return num==num_add;
+	    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		System.out.println(t.checkPerfectNumber(16));
+		
+		
+
+	}
+
+}

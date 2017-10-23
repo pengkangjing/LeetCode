@@ -1,0 +1,55 @@
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+		 
+	        for(int i=1;i<s.length();i++){
+	        	
+	        	String sub=s.substring(0, i);
+	        	if(s.length()%sub.length()!=0)
+	        		continue;
+	        	for(int j=0,k=j+sub.length();j<sub.length();j++,k++){
+	        		
+	        		if(sub.charAt(j)!=s.charAt(k))
+	        			break;
+	        		if(j==sub.length()-1)
+	        			j=-1;
+	        		if(k==s.length()-1)
+	        			return true;
+	        	}
+	        }
+	        return false;
+	    }
+    
+    //两种方法
+    /*
+    public boolean repeatedSubstringPattern(String s) {
+	        int len=s.length();
+             if(len==1)
+                 return false;
+	        List<Integer> list = new ArrayList<Integer>();
+	        list.add(1);
+	        for(int i=2;i<=Math.sqrt((double)len);i++){
+	        	if(len%i==0){
+	        		list.add(i);
+                    if(i!=len/i)
+                        list.add(len/i);               //list中的是可能的子序列长度；
+	        		
+	        	}
+	        }
+	        for(int j=0;j<list.size();j++){
+             
+	        	for(int k=0,l=k+list.get(j);k<list.get(j);k++,l++){
+	        		if(s.charAt(k)!=s.charAt(l))
+	        			break;
+	        		if(k==list.get(j)-1)
+	        			k=-1;
+	        		if(l==s.length()-1)
+	        			return true;
+	        	}
+	        }
+        return false;
+	    }
+        */
+}
+
+
+ 

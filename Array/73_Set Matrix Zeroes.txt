@@ -1,0 +1,71 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int[] n= new int[matrix[0].length];   //O(n)   常数空间复杂度
+       
+        for(int i=0;i<matrix.length;i++){
+             int flag=1;
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                    flag=0;
+                    n[j]=1;
+                }
+                   
+            }
+            if(flag==0){
+                
+                 for(int k=0;k<matrix[0].length;k++)
+                     {
+                
+                         matrix[i][k]=0;
+                     }
+            }
+            
+        }
+        for(int k=0;k<matrix[0].length;k++){
+            if(n[k]==1){
+                for(int g=0;g<matrix.length;g++){
+                    matrix[g][k]=0;
+                }
+            }
+        }
+        
+        
+        
+    }
+}
+//O(m+n)版本
+/*
+public void setZeroes(int[][] matrix) {
+        
+        int[] m= new int[matrix.length];
+        int[] n= new int[matrix[0].length];
+        
+        for(int i=0;i<matrix.length;i++){
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]==0){
+                     m[i]=1;
+                    n[j]=1;
+                }
+                   
+            }
+        }
+        for(int k=0;k<m.length;k++){
+            if(m[k]==1){
+                for(int h=0;h<matrix[0].length;h++){
+                    matrix[k][h]=0;
+                }
+                
+            }
+        }
+        for(int l=0;l<n.length;l++){
+                 if(n[l]==1){
+                for(int g=0;g<matrix.length;g++){
+                    matrix[g][l]=0;
+                } 
+            }
+            }
+        
+        
+    }
+
+*/

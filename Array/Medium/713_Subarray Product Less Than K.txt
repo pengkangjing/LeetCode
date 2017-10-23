@@ -1,0 +1,37 @@
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int count=0;
+        int len=nums.length;
+        System.out.println(len);
+        
+        
+            for(int j=0;j<len;j++){
+                
+                for(int i=1;i<=len-j;i++){
+                    
+                    
+                        int product=1;
+
+                        for(int l=j;l<(j+i);l++){
+
+                            product = product*nums[l];
+                            if(product>k)
+                                break;                              //如果乘机已经大于k了，后面的就不用再乘了
+
+                        }
+
+                        if(product<k){                            //r如果小于k，计数加1
+
+                            count++;
+                        }
+                        else break;                               //否则跳出这个循环，因为更大的长度的乘积是在这个乘积的基础上再乘以其他的数，
+                                                                //肯定不满足小于k
+                    
+                }
+                
+            
+        }
+        
+        return count;
+    }
+}

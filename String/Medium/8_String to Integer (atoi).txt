@@ -1,0 +1,56 @@
+class Solution {
+    public int myAtoi(String str) {
+        str=str.trim();                                              //去掉首尾的空格
+        if(str.matches( "(^(\\+|-)?)[0-9]{1,}[^0-9]*.*$")){                   //匹配以正负号开头或者没有正负号 的接下来是数字   
+                                                                              //后面跟0个或以上的任意 字符
+            //"^(0|(-?[1-9][0-9]*))$"   "^-?[1-9][0-9]*$"   "^(0|(/+?[1-9][0-9]*))[^0-9]*$" "^(0|((\\+|-)?[1-9][0-9]*))[^0-9]*$"
+            
+            long result=0;
+            int flag=0;
+            
+            if(str.charAt(0)=='-'){                                                //判断符号，并记录正负，去掉该符号
+                flag=1;
+                str=str.substring(1);
+            }
+            else if(str.charAt(0)=='+'){                                          //判断符号，并记录正负，去掉该符号
+                 str=str.substring(1);
+            }
+            
+            int k=1;                                                               //从第二个字符开始查找不是数字的字符
+            while((k<str.length())&&(str.charAt(k)>47)&&(str.charAt(k)<59))
+                k++;
+            
+            str=str.substring(0,k);
+
+            if((str.charAt(0)=='0')&&(str.length()>1))
+                str=str.substring(1);                                             //舍弃之后的所有字符
+           
+          
+            if(str.length()>10){                                                  //int 最长是10位 2147483647   如果在这不做限制的话 即使这里
+                if(flag==1)                                                       //使用long也会溢出
+                    return Integer.MIN_VALUE;
+                else return Integer.MAX_VALUE;
+            }
+            for(int i=0;i<str.length();i++){
+            
+                result=result*10+(int)(str.charAt(i)-'0');
+            }
+
+            if(flag==1){
+                result=-result;
+                if(result<Integer.MIN_VALUE)
+                    result=Integer.MIN_VALUE;
+            }
+            else     {
+                
+                if(result>Integer.MAX_VALUE)
+                    result=Integer.MAX_VALUE;
+            }
+            
+         return (int)result;   
+            
+        }
+           
+        return 0;
+    }
+}

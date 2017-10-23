@@ -1,0 +1,64 @@
+class Solution {
+    StringBuffer sb;
+    public String toHex(int num) {
+        String s=Integer.toBinaryString(num);
+        sb = new StringBuffer();
+        
+        for(int i=s.length();i>0;){
+            
+            if(i-4<0){
+                String t="";
+                for(int k=0;k<4-i;k++){          //0²»¹»£¬²¹0
+                    t=t+"0";
+                }
+                con_str(t+s.substring(0,i));
+                break;
+            }
+            con_str(s.substring(i-4,i));
+            i-=4;
+        }
+      
+     
+        return sb.toString();
+    }
+    private void con_str(String s){
+       
+        switch(s){
+              case "0000": sb.insert(0,'0');
+                      break;  
+              case "0001": sb.insert(0,'1');
+                      break;
+              case "0010": sb.insert(0,'2');
+                      break;
+              case "0011": sb.insert(0,'3');
+                      break;
+              case "0100": sb.insert(0,'4');
+                      break;
+              case "0101": sb.insert(0,'5');
+                      break;
+              case "0110": sb.insert(0,'6');
+                      break;
+              case "0111": sb.insert(0,'7');
+                      break;
+              case "1000": sb.insert(0,'8');
+                      break;
+              case "1001": sb.insert(0,'9');
+                      break;
+              case "1010": sb.insert(0,'a');
+                      break;
+              case "1011": sb.insert(0,'b');
+                      break;
+              case "1100": sb.insert(0,'c');
+                      break;
+              case "1101": sb.insert(0,'d');
+                      break;
+              case "1110": sb.insert(0,'e');
+                      break;
+              case "1111": sb.insert(0,'f');
+                      break;
+              
+                  
+          }
+        
+    }
+}

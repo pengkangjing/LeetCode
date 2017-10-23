@@ -1,0 +1,36 @@
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
+	 public int removeElement(int[] nums, int val) {
+		 int j=0;
+	      for(int i=0;i<nums.length;i++){
+	    	  if(nums[i]==val)
+	    		  j++;
+	    	  else nums[i-j]=nums[i];
+	      }  
+	      return nums.length-j;
+	    }
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		
+		int[] nums={3,2,2,3,3,5,6,8,3,4};
+		
+		System.out.println(t.removeElement(nums,3));
+	
+	
+
+	}
+
+}

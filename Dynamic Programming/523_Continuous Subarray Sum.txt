@@ -1,0 +1,22 @@
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        
+        for(int i=2;i<=nums.length;i++){
+            
+            for(int j=0;j<=nums.length-i;j++){
+                int sum=0;
+                for(int l=0;l<i;l++){
+                    
+                   sum+=nums[l+j];
+                    
+                }
+                if((k==0)&&(sum==0))   //注意k=0的情况，防止下面除以0报错
+                    return true;
+                if((k!=0)&&(sum%k==0))
+                    return true;
+            }
+        }
+        
+        return false;
+    }
+}

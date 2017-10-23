@@ -1,0 +1,22 @@
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer,Integer> m=new HashMap<Integer,Integer>();
+        List<Integer> list = new ArrayList<Integer>();
+        for(int i=0;i<nums1.length;i++){
+        	if(m.containsKey(nums1[i]))
+        		m.put(nums1[i], m.get(nums1[i])+1);
+        	else m.put(nums1[i], 1);
+        }
+        for(int j=0;j<nums2.length;j++){
+        	if(m.containsKey(nums2[j])&&(m.get(nums2[j])>0)){
+        		list.add(nums2[j]);
+        		m.put(nums2[j], m.get(nums2[j])-1);
+        	}
+        }
+        int[] a=new int[list.size()];
+        for(int k=0;k<list.size();k++){
+        	a[k]=list.get(k);
+        }
+        return a;
+    }
+}

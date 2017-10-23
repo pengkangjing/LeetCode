@@ -1,0 +1,26 @@
+class Solution {
+    public int integerReplacement(int n) {
+        int result=0;
+        long n_long =(long)n;    //防止溢出  当n=2147483647 =2^31-1  时会出现溢出 所以改成long
+         
+        
+        while(n_long!=1){
+            if(n_long%2==0)
+            {
+                n_long=n_long/2;
+                result++;
+            }
+            else {
+                  if((n_long==3)||((n_long-1)/2%2==0))  //n=3的时候直接变为2，按规则的话会变成4反而多了一步
+                      
+                      n_long=n_long-1;
+                  else n_long=n_long+1;
+                
+                result++;
+            }
+                
+        }
+        return result;
+       
+    }
+}

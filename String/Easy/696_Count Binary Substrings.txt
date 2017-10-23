@@ -1,0 +1,30 @@
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int result = 0;
+        System.out.println(s.length());
+        
+         int count1=0;
+        
+        for(int i=0;i<s.length();i++){
+            int count2=1;
+           
+            int j=i;
+            
+             while((i<s.length()-1)&&(s.charAt(i)==s.charAt(i+1))){
+                 
+                    count2++;
+                    i++;
+             
+                }
+            if(count1<count2)
+                result+=count1;
+            else result+=count2;
+            
+            count1=count2;
+                
+           
+        }
+        
+        return result;
+    }
+}

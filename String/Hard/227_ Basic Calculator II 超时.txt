@@ -1,0 +1,86 @@
+import java.util.Stack;
+public class Solution {
+
+	public Solution() {
+		// TODO Auto-generated constructor stub
+	}
+        int i;
+	String S;
+	 public int calculate(String s) {
+	        s=s.replaceAll(" ", "");
+	        S=s;
+	        int result=0;
+	        boolean flag=true;
+	        Stack<Integer> num=new Stack<Integer>();
+	        //Stack<Character> operator=new Stack<Character>();
+	       // int a,b;
+	       // int i;
+	        for(i=0;i<s.length();i++){
+	        	System.out.println(i+"nono");
+	        	if(s.charAt(i)=='*')
+	        	{
+	        		i++;
+	        		num.push(num.pop()*getnum());
+	        		//System.out.println("hhaha"+num);
+	        		System.out.println(i+"HAHA");
+	        	}
+	        		
+	            else if(s.charAt(i)=='/')
+	            {
+	            	i++;
+	            	num.push(num.pop()/getnum());
+	        	    
+	            }
+	        		
+	        	else if(s.charAt(i)=='+')
+	        		 flag=true;
+	        		//operator.push(s.charAt(i));
+	        	else if(s.charAt(i)=='-')
+	        		flag=false;
+	        	else  
+	        	{     
+	        		  if(flag){
+	        			  num.push(getnum());
+	        		  }
+	        		  else {
+	        			  num.push(-getnum());
+	        			  flag=true;
+	        		  }
+	        	      
+        		     
+	        	}
+	        	
+	        	System.out.println(num);
+	        }
+	        
+	        while(!num.isEmpty()){
+	        	result=result+num.pop();
+	        	/*b=num.pop();
+	        	a=num.pop();
+	        	if(operator.pop()=='-')
+	        		num.push(a-b);
+	        	else num.push(a+b);*/
+	        }
+	        return result;
+	        
+	    }
+private int getnum() {
+	int d=0;
+	while(i<S.length()&&Character.getNumericValue(S.charAt(i))>=0&&Character.getNumericValue(S.charAt(i))<=9)
+	{
+		d=d*10+Character.getNumericValue(S.charAt(i));
+	    i++;
+	    System.out.println(d+"d");
+	}
+	    i--;
+	    System.out.println(i+"yes");
+		return d;
+	}
+
+public static void main(String[] args) {
+	// TODO Auto-generated method stub
+	String l=" 1-1/21";
+	Solution m=new Solution();
+	System.out.println(m.calculate(l));
+}
+}

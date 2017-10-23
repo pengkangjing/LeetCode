@@ -1,0 +1,17 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n=matrix.length;
+        for(int i=0;i<=n/2;i++){                          //转换是一圈一圈来的，如果是奇数则最里面一圈只有一个数，不用转换
+            for(int j=i;j<n-1-i;j++){                    //注意j要小于n-1-i，否则会转很多次
+                
+                int temp=matrix[i][j];
+                matrix[i][j]=matrix[n-1-j][i];
+                matrix[n-1-j][i]=matrix[n-1-i][n-1-j];
+                matrix[n-1-i][n-1-j]=matrix[j][n-1-i];
+                matrix[j][n-1-i]=temp;
+                
+            }
+        }
+        
+    }
+}

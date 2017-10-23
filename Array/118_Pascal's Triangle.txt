@@ -1,0 +1,115 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public List<List<Integer>> generate(int numRows) {
+		 List<List<Integer>> list=new ArrayList<List<Integer>>();
+        if(numRows==0)
+               return list;
+    	 for(int i=0;i<numRows;i++){
+		 list.add(new ArrayList<Integer>());
+     	 for(int j=0;j<=i;j++){
+     		
+	        	if(j==0||j==i)
+	        		 list.get(i).add(1);
+        	
+	        	else {
+	        		
+	        		list.get(i).add(list.get(i-1).get(j-1)+list.get(i-1).get(j));
+
+	        		}
+	        	
+     		}
+  			        
+	 		}
+	 return list;   
+	 }
+		 
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		
+		//int[] nums={1,3,5,6};
+		
+		System.out.println(t.generate(7));
+	
+	
+
+	}
+
+}
+前面的是自己刚开始写的，对引用类型了解的不深，导致折腾了很久
+下面的是根据参考答案写的，其实就是参考答案（^-^）
+
+
+
+*/
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author PKJ
+ *
+ */
+public class Test {
+
+	/**
+	 * 
+	 */
+	public Test() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public List<List<Integer>> generate(int numRows) {
+		 List<List<Integer>> list=new ArrayList<List<Integer>>();
+		 
+         if(numRows==0)
+        	 return list;      	 
+                
+        
+	        for(int i=0;i<numRows;i++){
+	    	
+		        List<Integer>	row=new ArrayList<Integer>();
+		        	
+			        	for(int j=0;j<=i;j++){
+			        		
+				        	if(j==0||j==i)
+				        		row.add(1);     	
+				        	else {
+				        		
+				        		row.add(list.get(i-1).get(j-1)+list.get(i-1).get(j));
+			
+				        		}
+			        		}
+			        	list.add(row);
+			     			        
+		        }
+	     return list;   
+	    }
+	public static void main(String[] args)  {
+		// TODO Auto-generated method stub
+		
+		Test t=new Test();
+		
+		//int[] nums={1,3,5,6};
+		
+		System.out.println(t.generate(7));
+	
+	
+
+	}
+
+}

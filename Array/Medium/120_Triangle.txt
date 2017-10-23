@@ -1,0 +1,28 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        
+        int n = triangle.get(triangle.size()-1).size();
+      
+        if(triangle.size()==1)                                //大小为1直接返回值，不用算了
+            return triangle.get(0).get(0);
+        
+        for(int i=1;i<n;i++){
+            
+            triangle.get(i).set(0, triangle.get(i).get(0)+triangle.get(i-1).get(0));   //必须用set保存值，下一次循环才能使用到之前的结果
+          
+            for(int j=1;j<i;j++){
+                 triangle.get(i).set(j,triangle.get(i).get(j)+Math.min(triangle.get(i-1).get(j-1),triangle.get(i-1).get(j)));
+               
+            }
+         
+            
+            triangle.get(i).set(i,triangle.get(i).get(i)+triangle.get(i-1).get(i-1));
+        
+        }
+        Integer[] result=triangle.get(n-1).toArray(new Integer[n]);
+        Arrays.sort(result);
+        return result[0];
+        
+        
+    }
+}

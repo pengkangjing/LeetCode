@@ -1,0 +1,82 @@
+class Solution {
+    
+    
+    List<String> result;
+    StringBuffer sb;
+    String str;
+    int len;
+    public List<String> restoreIpAddresses(String s) {
+        
+         result = new ArrayList<String>();       //结果列表
+         sb=new StringBuffer();                  //每一项合法ip
+         len=s.length();                         //字符串的长度
+         str=s;                                  //成员变量初始化化，方便后面的成员函数访问；
+         check(0,0,str);                         //调用函数，试探每一个合法的ip
+	     
+	
+ 
+	return result;
+    }
+    
+    private void check(int i,int k,String s) {        //i（0-3）表示ip的4个字段 ，k表示接下来的一个字段从字符串的那个位置开始取
+        
+		if(i==4){                                     //i=4 表示该ip已经通过检查，是一个合法ip，加入到结果列表中
+            result.add(sb.toString());
+			return;
+		}
+		
+		for(int j=1;j<=3;j++){                        //j（1-3）j表示每个字段只能取1-3个数字（0-255）
+         
+            
+            if((k+j)>s.length())                      //如果要取的范围超过字符串的范围了，说明之前已经检查过了，直接跳过
+                break;
+            sb.append(s.substring(k,k+j)) ;           //取字符串的第k位到k+j-1位作为第i个字段
+            
+            if(i<3)
+                sb.append(".") ;                       //每个字段后加点，除了最后一个；
+                
+        
+            
+    		if(judge(i,s.substring(k,k+j))){             //这里的if用来判断约束条件；  			
+                
+        		check(i+1,k+j,s);                       //继续下一个字段（i+1），下一个字段从字符串的第k+j位开始取
+                
+        	}
+            
+            len+=j;          //回溯，len表示字符串剩余长度，剩余长度加上前面的j；
+         
+            if(i<3)
+                sb.deleteCharAt(sb.length()-1);        //前三个字段撤销加入的.号
+    		 sb.delete(sb.length()-j, sb.length());    //撤销加入的字符串；
+    		
+    	}
+		
+	}
+
+	private boolean judge(int i,String s) {            //这里的s表示字符串中取的子字符串作为第i+1个字段的值
+        len-=s.length();                               //字符串剩余长度减去子字符串的长度
+      
+        if((s.charAt(0)=='0')&&(s.length()>1))         //排除非0数字以0开头（001）
+            return false;
+        if((Integer.valueOf(s))>255||(Integer.valueOf(s)<0)){   //合法ip字段的范围（0-255）
+          //  System.out.println("超出范围");
+            return false;
+        }
+            
+    
+      
+        if (len>3*(3-i))                           //如果剩余长度，超出剩余字段长度的3倍，则该ip肯定不合法，直接跳过
+        {
+           //  System.out.println("剩余长度太长");
+            return false;
+        }
+            
+		return true;
+	}
+
+   
+}
+
+
+
+

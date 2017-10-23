@@ -1,0 +1,17 @@
+public class Solution {
+   public boolean isNumber(String s) {
+	         s=s.trim();
+	        String REGEX="^ *[+-]?(([0-9]+\\.?)|([0-9]*\\.[0-9]+))(e[+-]?[0-9]+)? *$";
+                //String REGEX="^[+-]?(([+-]?[0-9]+\\.?[0-9]*)|(\\.[0-9]+))(e[+-]?[0-9]+)?";
+                //String REGEX="^[+-]?(([0-9]*\\.[0-9]+)|([0-9]+\\.[0-9]*)|([0-9]+))(e[+-]?[0-9]+)?";
+                //正则表达式不唯一，只要把所有情况考虑到了就行
+	      return   s.matches(REGEX);
+	       
+	    }
+public static void main(String[] args) {
+	// TODO Auto-generated method stub
+	String l="46.e3";
+	Solution m=new Solution();
+	System.out.println(m.isNumber(l));
+}
+}

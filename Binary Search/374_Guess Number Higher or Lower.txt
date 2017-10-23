@@ -1,0 +1,23 @@
+public class Solution extends GuessGame {
+   public int guessNumber(int n) {
+	        int flag=0;
+	        int left=1;
+	        int right=n;
+	        int mid=left+(right-left)/2;
+	        flag=guess(mid);
+	        while(flag!=0){
+	            if(flag==1){
+	                left=mid+1;
+	                mid=left+(right-left)/2;
+	               flag=guess(mid);
+	            }
+	            else{
+	                right=mid-1;
+	                mid=left+(right-left)/2;
+	                flag=guess(mid);
+	            }
+	        }
+	        return mid;
+	       
+	    }
+}

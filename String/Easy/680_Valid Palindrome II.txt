@@ -1,0 +1,26 @@
+class Solution {
+     public boolean validPalindrome(String s) {
+	        
+		 int flag=0;
+		 for(int i=0,j=s.length()-1;i<j;i++,j--){
+			 
+			 if(s.charAt(i)!=s.charAt(j)){
+				 
+				   return (isPalindrome(s.substring(i, j)))||(isPalindrome(s.substring(i+1, j+1)));
+				 
+				 }
+			 
+			 }
+		 return true;
+		 }
+		 
+	    private boolean isPalindrome(String sub) {
+	    	for(int i=0,j=sub.length()-1;i<j;i++,j--){
+	    		if(sub.charAt(i)!=sub.charAt(j))
+	    			return false;
+	    	}
+	    	
+		return true;
+	}
+
+}
