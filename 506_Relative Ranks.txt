@@ -1,0 +1,31 @@
+class Solution {
+    public String[] findRelativeRanks(int[] nums) {
+        
+        String[] result = new  String[nums.length];
+        int[] temp=new int[nums.length];
+        System.arraycopy(nums, 0, temp, 0, nums.length);     //要用这个复制，不能用 temp=nums 这是引用，两个共享一块内存
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length;i++){
+            for(int j=0;j<nums.length;j++){
+                if(temp[i]==nums[j]){
+                    
+                    if(j==nums.length-1)
+                        result[i]="Gold Medal";
+                    else if(j==nums.length-2)
+                        result[i]="Silver Medal";
+                    else if(j==nums.length-3)
+                        result[i]="Bronze Medal";
+                    else result[i]=String.valueOf(nums.length-j);
+                    
+                }
+                   
+            }
+            
+        }
+        
+        return result;
+    }
+}
+
+
+
