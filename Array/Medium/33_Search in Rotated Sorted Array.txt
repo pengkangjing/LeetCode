@@ -1,0 +1,39 @@
+class Solution {
+    public int search(int[] nums, int target) {                 //第二种方法减少了一些计算
+        if(nums.length==0)                                      //第三种方法可以使用二分查找，效率更高
+            return -1;
+        if(target<nums[0]){
+            for(int j=nums.length-1;j>=0;j--){
+                if(nums[j]==target)
+                    return j;
+                if(target>nums[j])
+                    return -1;
+                if((j>0)&&(nums[j]<nums[j-1]))
+                    return -1;
+            }
+            return -1;
+        }
+        
+        
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==target)
+                return i;
+            if(nums[i]>target)
+                break;
+            if((i<nums.length-1)&&(nums[i]>nums[i+1]))
+                break;
+        }
+        return -1;
+    }
+}
+//第一种方法，没有任何优化，直接搜索
+/*
+  public int search(int[] nums, int target) {              
+        
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==target)
+                return i;
+        }
+        return -1;
+    }
+*/

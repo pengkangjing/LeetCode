@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int findTilt(TreeNode root) {         //这里实现的是广度优先   感觉可以再实现一下深度优先  感觉深度优先可以减少很多重复的计算
+        if(root==null)
+            return 0;
+        if((root.left==null)&&(root.right==null))
+            return 0;
+        else if(root.left==null){
+            return Math.abs(sum(root.right))+findTilt(root.right);
+        }
+        else if(root.right==null){
+            return Math.abs(sum(root.left))+findTilt(root.left);
+        }
+        else return Math.abs(sum(root.right)-sum(root.left))+findTilt(root.left)+findTilt(root.right);
+        
+    }
+    
+    private int sum(TreeNode root){
+        int result=0;
+        if(root==null)
+            return 0;
+        result+=root.val+sum(root.left)+sum(root.right);
+        return result;
+    }
+}
