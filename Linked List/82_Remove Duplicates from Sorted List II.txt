@@ -1,0 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;()
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode temp = head;
+        ListNode pre =head;
+      
+        
+        ListNode result  = temp;
+        int count=0;
+        while((temp!=null)&&(temp.next!=null)){
+            
+            if(temp.val!=temp.next.val){
+            
+            count++;
+            if(count==1)                 //如果第一次出现两个数不相等，那返回的结果就是第一个节点
+                result=temp;
+                
+            pre=temp;                      //
+            temp=temp.next;                //平移
+           
+                    
+        }
+        else {
+            while((temp.next!=null)&&(temp.val==temp.next.val)){
+                temp=temp.next;          //平移
+            }
+            temp=temp.next;              //多移动一次，消除所有的重复项，否则还会保留重复项中的一个
+            pre.next=temp;   
+            
+            
+            if((pre==head)&&(count==0))        //排除 1-1-2-2 这种情况
+                result=temp;
+            
+        }
+            
+        }
+       
+            
+        
+            
+        return result;
+    }
+}

@@ -1,0 +1,56 @@
+class Solution {
+    public int rob(int[] nums) {     //思想是用一个数组，保留到每一步的最大值，后面的计算在前面的基础上再加
+        if(nums.length==0)
+            return 0;
+        if(nums.length==1)
+            return nums[0];
+        
+        int[] result = new int[nums.length];
+        
+        for(int i=0;i<nums.length;i++){
+            if(i==0)
+                result[i]=nums[i];
+            else if(i==1)
+                result[i]=Math.max(nums[1],nums[0]);
+            else {
+               
+                if(i%2==0)
+                    result[i]=Math.max(result[i-1],result[i-2]+nums[i]);
+                else result[i]=Math.max(result[i-1],nums[i]+Math.max(result[i-2],result[i-3]));
+               
+            }
+        }
+        
+        return Math.max(result[nums.length-1],result[nums.length-2]);
+    }
+}
+
+
+//第一次写的狗屎代码  超时错误
+/*
+public int rob(int[] nums) {                  
+        if(nums.length==0)
+            return 0;
+        if(nums.length==1)
+            return nums[0];
+        if(nums.length==2)
+            return Math.max(nums[0],nums[1]);
+        if(nums.length==3)
+            return  Math.max(nums[0]+nums[2],nums[1]);
+        
+        int[] temp1=new int[nums.length-2];
+        int[] temp2=new int[nums.length-3];
+        for(int i=2;i<nums.length;i++){
+            temp1[i-2]=nums[i];
+        }
+        for(int i=3;i<nums.length;i++){
+            temp2[i-3]=nums[i];
+        }
+        //System.out.println(temp2[0]);
+       //System.out.println(rob(temp1));
+       //  System.out.println(rob(temp2));
+        
+        return Math.max((nums[0]+rob(temp1)),(nums[1]+rob(temp2)));
+        
+    }
+*/
