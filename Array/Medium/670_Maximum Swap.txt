@@ -1,0 +1,46 @@
+class Solution {
+    public int maximumSwap(int num) {
+        
+        String str = String.valueOf(num);
+        
+        StringBuffer sb = new StringBuffer();
+        
+       
+        for(int i=0;i<str.length()-1;i++){
+            
+            int max = 0;
+            int j=i+1;
+            int temp=j;
+            for(;j<str.length();j++){
+                
+                
+                if(str.charAt(i)<str.charAt(j)){
+                    
+                    if(max<=(int)(str.charAt(j)-'0')){        //这里的等于号很关键   解决了1993 如果没有等号 则为9193 ，有等号之后变成9913 才是正确
+                         max=(int)(str.charAt(j)-'0');        //结果
+                        temp=j;
+                    }
+                       
+                }
+            }
+            if(max!=0){
+                
+                if(i>0)
+                    sb.append(str.substring(0,i));
+                
+                
+                sb.append(str.charAt(temp));
+                sb.append(str.substring(i+1,temp));
+                sb.append(str.charAt(i));
+                if(temp<str.length()-1)
+                    sb.append(str.substring(temp+1));
+                    
+              return   Integer.valueOf(sb.toString());
+                
+                
+            }
+            
+        }
+        return num;
+    }
+}
