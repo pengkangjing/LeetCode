@@ -1,0 +1,86 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        
+        if(lists.length==0)
+            return null;
+        
+        //ListNode temp = lists[0];
+        int len = lists.length; 
+        
+        for(int j=0;j<Math.ceil(Math.log(len)/Math.log(2));j++){                    //每隔2的j次方的两个链表合并 合并次数为对数级别 如果两个合并
+                                                                                    //之后，再和下一个合并，则是合并次数线性级别 ，超时错误
+           // System.out.println(Math.ceil(Math.log(len)/Math.log(2)));
+            int k = (int)Math.pow(2,j);
+            for(int i=0;i<len;){
+            
+            if((i+k)>=len)
+                break;
+            lists[i]=mergeTwoLists(lists[i],lists[i+k]);
+                
+            i=i+2*k;
+        }
+            
+        }
+       
+        return lists[0];
+    }
+    
+    private ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        
+       
+        ListNode result;
+        
+        if((l1==null)&&(l2==null))
+            return null;
+        if(l1==null)
+            return l2;
+        if(l2==null)
+            return l1;
+        
+        if(l1.val<=l2.val)
+            result = l1;
+        else result = l2;
+        
+        ListNode temp;
+        
+        while((l1!=null)&&(l2!=null)){
+           
+            if(l1.val<=l2.val){
+            
+            while((l1.next!=null)&&(l1.next.val<=l2.val)){
+                
+                l1=l1.next;
+            }
+            
+            temp = l1.next;
+            l1.next = l2;
+            l1=temp;
+            
+        }
+        else {
+            while((l2.next!=null)&&(l2.next.val<l1.val)){
+                
+                l2=l2.next;
+            }
+          
+            temp = l2.next;
+            l2.next = l1;
+            l2=temp;
+            
+        }
+            
+        }
+            
+       return result;     
+        
+        
+    }
+}

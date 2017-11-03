@@ -1,0 +1,146 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+    public ListNode partition(ListNode head, int x) {
+         ListNode temp_a=new ListNode(0);
+         ListNode temp_b=new ListNode(0);
+        ListNode temp1=temp_a;
+        ListNode temp2=temp_b;
+        
+        while(head!=null)
+        {
+            if(head.val<x){
+                temp1.next=head;
+                temp1=temp1.next;
+                
+            }
+            else {
+                temp2.next=head;
+                temp2=temp2.next;
+               
+            }
+            head=head.next;
+        }
+       temp1.next=temp_b.next;
+    temp2.next=null;
+    return temp_a.next; 
+    }
+    
+    
+    
+   
+}
+//第一次写的狗屎代码 ，虽然A过了，但简直不能看
+/*
+
+ public ListNode partition(ListNode head, int x) {
+        
+        if((head==null)||(head.next==null))
+            return head;
+        ListNode result;
+        
+        ListNode pre = head ;
+        ListNode temp = head.next;
+        ListNode temp1 ;
+        
+        if(pre.val<x){
+            
+            result=head;
+            while(pre.next.val<x){
+                pre=pre.next;
+                if(pre.next==null)
+                    return head;
+            }
+            temp=pre.next;
+            temp1=temp;   
+            while(true){
+                  if(temp.next==null){
+                      pre.next=temp1;
+                    
+                    return head;
+                   }
+                while(temp.next.val>=x){
+                    temp=temp.next;
+                    
+                    if(temp.next==null){
+                     pre.next=temp1;   
+                    return head;
+                   }
+                }
+                pre.next=temp.next;
+                pre=pre.next;
+                if(pre.next==null)
+                {
+                    pre.next=temp1;
+                    temp.next=null;
+                    return head;
+                }
+                while(pre.next.val<x){
+                    pre=pre.next;
+                    if(pre.next==null)
+                    {
+                        pre.next=temp1;
+                        temp.next=null;
+                        return head;
+                    }
+                }
+                temp.next=pre.next;
+                temp=temp.next;
+                
+            }
+        }
+        else{
+            
+            while(pre.next.val>=x){
+                pre=pre.next;
+                if(pre.next==null)
+                    return head;
+            }
+            
+            temp=pre;
+            pre=pre.next;
+            result=pre;
+         while(true){
+                
+                if(pre.next==null){
+                    
+                    pre.next=head;
+                    temp.next=null;
+                    return result;
+                   
+                }
+                
+                if(pre.next.val<x){
+                    pre=pre.next;
+                }
+               else{
+                   temp1=pre.next;
+                   while(temp1.val>=x){
+                       
+                       temp.next=temp1;
+                       temp=temp.next;
+                       
+                       if(temp1.next==null){
+                           temp.next=null;
+                           pre.next=head;
+                           return result;
+                       }
+                       temp1=temp1.next;
+                   }
+                   
+                   pre.next=temp1;
+                   pre=pre.next;
+                     
+                   
+               }  
+            }
+        }
+    }
+*/

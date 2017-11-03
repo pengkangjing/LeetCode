@@ -1,0 +1,74 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+        
+        if(head==null)
+            return null;
+        if(k==0)
+            return head;
+        
+        ListNode temp = head;
+        ListNode result ;
+        
+       
+        int count=0;
+        while(temp!=null){
+            count++;
+            temp=temp.next;
+        }
+      
+         k=k%count;     //这一步很重要 ，当k大于长度count时，每count次移动还原 所以不变  ，这里取余；
+         if(k==0)
+            return head;
+        int location=1;
+       
+        temp=head;
+        while(location!=count-k){
+            
+            location++;
+            temp=temp.next;
+            
+        }
+        result = temp.next;
+        temp.next=null;
+        temp=result;
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=head;
+        
+       
+        
+       return result; 
+    }
+}
+//下面是第一次做没看懂题目写的 
+/*
+ while(k>0){
+            
+            temp=temp.next;
+            if(temp==null)
+            return head;
+            k--;
+        }
+        
+       
+        result = temp.next;
+        if(result==null)
+            return head;
+        temp.next=null;
+        
+        temp=result;
+        
+        while(temp.next!=null){
+            temp=temp.next;
+        }
+        temp.next=head;
+*/
