@@ -1,0 +1,32 @@
+class Solution {
+    public int compress(char[] chars) {
+       // Arrays.sort(chars);                //["a","a","a","b","b","a","a"] 答案["a","3","b","2","a","2"] 所以不能排序
+        int len=0;
+        
+        int location=0;
+        
+        for(int i=0;i<chars.length;i++){
+            
+            chars[location++]=chars[i];
+            len++;
+            
+            int count=1;
+            while((i<chars.length-1)&&(chars[i]==chars[i+1])){
+                count++;
+                i++;
+            }
+            if(count==1)
+                continue;
+            String str = String.valueOf(count);
+            for(int j=0;j<str.length();j++){
+                chars[location++]=str.charAt(j);
+            }
+            len+=str.length();
+            
+     
+        }
+        System.out.println(len);
+        return len;
+        
+    }
+}

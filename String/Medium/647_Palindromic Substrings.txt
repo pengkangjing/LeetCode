@@ -1,0 +1,51 @@
+public class Solution {
+    public int countSubstrings(String s) {
+	      //int i,j;
+	        int count=0;
+            for(int i=0;i<s.length();i++){
+                
+                for(int j=1;j<=s.length()-i;j++){
+                    
+                    if(isPalindromic(s.substring(i,i+j)))
+	            		count++;
+                    
+                }
+            }
+        
+	       
+	       return count; 
+	        
+	    }
+    private boolean isPalindromic(String s) {
+	// TODO Auto-generated method stub
+	 if(s.length()<=1)
+	    	return true;
+      
+     s=s.toLowerCase();
+    // s=s.replaceAll("[^a-z|\\d]+", "");
+     int i,j;
+     i=0;
+     j=s.length()-1;
+     while(i<j){
+     	if(s.charAt(i)!=s.charAt(j))
+     		return false;
+     	i++;
+     	j--;
+     }
+  return true;   
+	
+}
+}
+/*
+
+ for(j=1;j<=s.length();j++){
+	            
+	            for(i=0;i+j<=s.length();i++){
+	            	if(isPalindromic(s.substring(i,i+j)))
+	            		count++;
+	            //System.out.println(s.substring(i,i+j));
+	        }
+	            
+	        }
+
+*/
