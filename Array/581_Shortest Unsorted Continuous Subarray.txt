@@ -1,0 +1,75 @@
+class Solution {
+    public int findUnsortedSubarray(int[] nums) {
+        int indexi=0;
+        int i=0; 
+        for(;i<nums.length-1;i++){        //如果某一个数的右边所有的数都大于它，则左边界右移一位 依次迭代
+            
+            int j=i+1;
+            for(;j<nums.length;j++){
+                if(nums[i]>nums[j])
+                    break;
+            }
+            if(j!=nums.length){
+                indexi=i;
+                break;
+            }
+        }
+        if(i==nums.length-1)
+            indexi=nums.length-1;
+        
+        
+        int indexj=nums.length-1;             //如果某一个数的左边数都小于它，则右边界左移一位 依次迭代
+        for(;k>0;k--){
+            int l=k-1;
+            for(;l>=0;l--){
+                if(nums[k]<nums[l])
+                    break;
+            }
+            if(l!=-1){
+                indexj=k;
+                break;
+            }
+                
+        }
+        if(k==0)
+            indexj=0;
+        if(indexj>indexi)
+         return indexj-indexi+1;
+        else return 0;
+    }
+}
+
+
+//这个不知道怎么解决中间出现一个很小的数的情况
+/*
+ public int findUnsortedSubarray(int[] nums) {
+        int indexi=0;
+        int indexj=nums.length-1;    
+        int i=0;
+        int j=nums.length-1;
+        for(;i<nums.length-1;i++){
+            if(nums[i]<nums[i+1])
+                break;
+        }
+        for(;j>0;j--){
+            if(nums[j]>nums[j-1])
+                break;
+        }
+        return j-i;
+        
+        
+        
+       for(;i<j;i++,j--){
+           if(nums[i]<nums[i+1]){
+               indexi++;
+               System.out.println("hahai"+indexi);
+           }
+               
+           if(nums[j]>nums[j-1]){
+               indexj--;
+               System.out.println("hahaj"+indexj);
+           }
+       }
+        return indexj-indexi+1;
+    }
+*/

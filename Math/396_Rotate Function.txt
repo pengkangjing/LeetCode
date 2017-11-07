@@ -1,0 +1,47 @@
+class Solution {
+    public int maxRotateFunction(int[] A) {
+        if(A.length==0)
+            return 0;
+        int sum=0;
+        for(int k=0;k<A.length;k++){
+            sum+=A[k];
+        }
+       int temp=0;
+       for(int i=0;i<A.length;i++){
+           temp+=i*A[i];
+       } 
+       int max=temp;
+      for(int j=1;j<A.length;j++){
+          temp=temp+sum-A.length*A[A.length-j];
+          if(temp>max)
+              max=temp;
+      }
+        return max;
+    }
+}
+//超时版本 暴力解法
+/*
+public int maxRotateFunction(int[] A) {
+        if(A.length==0)
+            return 0;
+        int max=Integer.MIN_VALUE;
+       
+        for(int i=0;i<A.length;i++){
+            
+            int temp = 0;
+            int k=i;
+            for (int j=0;j<A.length;j++){
+                
+                temp+=(k%A.length)*A[j];
+             //   System.out.println(temp);
+                k++;
+                
+            }
+            if(temp>max)
+                max=temp;
+            
+            
+        }
+        return max;
+    }
+*/

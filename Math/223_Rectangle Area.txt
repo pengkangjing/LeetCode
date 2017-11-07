@@ -1,0 +1,13 @@
+class Solution {
+    public int computeArea(int A, int B, int C, int D, int E, int F, int G, int H) {
+        int area=(C-A)*(D-B)+(G-E)*(H-F);
+        //int area_2=;
+        if((E>=C)||(G<=A)||(H<=B)||(F>=D))    //不相交
+            return area;
+        else {
+            int x = Math.min( Math.min((C-E),(C-A)), Math.min((G-A),(G-E)));   //前面的不相交 保证了这里面的每一项大于0；
+            int y = Math.min( Math.min((D-B),(H-B)), Math.min((D-F),(H-F)));
+            return area-x*y;
+        }
+    }
+}
