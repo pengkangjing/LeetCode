@@ -1,0 +1,58 @@
+class Solution {
+    public List<String> removeComments(String[] source) {
+        List<String>    result = new ArrayList<String>();
+        
+        int flag=0;               //1表示遇到/*  注释块开始 0表示 没有遇到注释块  或注释块到此结束
+        String last_str="";
+        for(int i=0;i<source.length;i++){
+            
+            StringBuffer sb = new StringBuffer();
+            int len=source[i].length();
+            
+            for(int j=0;j<len;j++){
+                
+                if(flag==0){
+                  
+                    if((source[i].charAt(j)=='/')&&(j<len-1)&&(source[i].charAt(j+1)=='*')){
+                        flag=1;
+                        System.out.println(source[i].charAt(j)+i+"  "+j);
+                        j++;
+                        
+                    }
+                    else if((source[i].charAt(j)=='/')&&(j<len-1)&&(source[i].charAt(j+1)=='/')){ //注释行好处理 直接不处理该行的剩下的字符
+                        
+                        break;
+                    }
+                    else sb.append(source[i].charAt(j));
+                        
+                    
+                }
+                else if(flag==1){
+                    
+                    if((source[i].charAt(j)=='*')&&(j<len-1)&&(source[i].charAt(j+1)=='/')){
+                        flag=0;
+                        j++;
+                    }
+                }
+            }
+          if(flag==1){
+              if(sb.toString().length()!=0){
+                  last_str=sb.toString();        //保存注释块之前的字符串
+              }
+              
+          }    
+          else {
+             
+              if((sb.toString().length()+last_str.length())!=0){    //为空的话 这一行不添加
+                  result.add(last_str+sb.toString()) ;             //将注释块前的字符串与注释块之后字符串相加 添加到结果中
+                  last_str="";                                    //清除已经 添加完了的注释块前的字符串
+              }
+                 
+          }
+            
+            
+        }
+        return result;
+        
+    }
+}

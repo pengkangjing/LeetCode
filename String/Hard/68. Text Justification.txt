@@ -1,0 +1,83 @@
+class Solution {
+    public List<String> fullJustify(String[] words, int maxWidth) {
+        List<String>  result = new ArrayList<String>();
+       // System.out.println(words.length);
+        
+        for(int i=0;i<words.length;i++){
+            int len=0;
+            int j=i;
+            while((i<words.length)&&(len<maxWidth)){
+                if(len+words[i].length()>maxWidth){
+                    i--;
+                    break;
+                }
+                    
+                else if(len+words[i].length()==maxWidth){
+                    
+                    if(i==j)                        //除非单个字符串长度为16
+                        len=maxWidth;   
+                    else i--;                       //否则不能加上这个字符串
+                    break;
+                }
+                else {
+                    
+                   
+                    if((i>j)&&((maxWidth-(len+words[i].length()))/(i-j)==0)){           //每次尝试多放下一个字符串时看空格是否够分
+                        i--;
+                        break;
+                        
+                    }
+                    else {
+                         len+=words[i].length();
+                         i++; 
+                    }
+                     
+                }
+           
+            }
+            if(i==words.length)
+                i--;
+            
+                
+            StringBuffer sb = new StringBuffer();
+            System.out.println(i);
+            if((i==words.length-1)||(i==j)){                           //最后一行(i==words.length-1)或一行只有一个字符串（i==j）   
+                for(int m=j;m<=i;m++){                                 //第一行能全部放下所有字符串也当做和最后一行处理
+                    sb.append(words[m]);                               //数组只包含一个空字符串[""],也在这处理
+                    if(m!=i)
+                        sb.append(" ");
+                }
+                for(int n=0;n<(maxWidth-len-i+j);n++){
+                    sb.append(" ");
+                }
+            }
+            else {                                           //前几行
+                int   space=maxWidth-len;                    //填充空格总数
+                int   per_space=space/(i-j);                 //均分空格
+                int   plus_space=space%(i-j);                //均分后多出来的空格数
+                StringBuffer spacestr = new StringBuffer();
+                for(int l=0;l<per_space;l++){                 //构造均分空格
+                    spacestr.append(" ");
+                }
+                
+                for(int k=j;k<=i;k++){
+                sb.append(words[k]);                        //添加字符串
+                if(k!=i){                                   //插入均分的空格
+                    sb.append(spacestr.toString());
+                    
+                }
+                if(plus_space>0){                           //把不能均分的空格分给左边
+                   sb.append(" ");
+                   plus_space--;
+                }
+                    
+            } 
+            }
+            
+           
+            result.add(sb.toString());
+            
+        }
+      return result;  
+    }
+}

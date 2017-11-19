@@ -1,0 +1,25 @@
+class Solution {
+   public int leastBricks(List<List<Integer>> wall) {
+	        
+	        int result=0;
+	        
+	       Map<Integer,Integer> m = new HashMap<Integer,Integer>();
+	        for(int i=0;i<wall.size();i++){
+	            
+	            int sum=0;
+	            for(int j=0;j<wall.get(i).size()-1;j++){
+	                sum+=wall.get(i).get(j);
+	                if(m.containsKey(sum))
+	                    m.put(sum,m.get(sum)+1);
+	                else m.put(sum,1);
+	                
+	            }
+	        }
+	       for(Integer key : m.keySet()){
+	           if(result<m.get(key))
+	               result=m.get(key);
+              
+	       } 
+	        return wall.size()-result;
+	    }
+}

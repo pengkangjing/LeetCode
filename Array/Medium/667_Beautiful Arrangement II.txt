@@ -1,0 +1,21 @@
+class Solution {
+    public int[] constructArray(int n, int k) {
+        int[] result = new int[n];
+        int flag=1;
+        for(int i=0;i<n;i++){
+            if(i==0)
+                result[i]=1;
+            else if(k==0)
+                result[i]=i+1;
+            else{
+                
+                result[i]=result[i-1]+flag*k;
+                flag=-flag;
+                k--;
+            }
+        }
+        return result;
+    }
+}
+//居然一次性A，好高兴
+//以1开始 接下来先加k ，k--，再减k 交替加减 k等于0后，把剩余的按顺序填上

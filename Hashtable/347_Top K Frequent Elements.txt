@@ -1,0 +1,26 @@
+class Solution {
+    public List<Integer> topKFrequent(int[] nums, int k) {      
+        List<Integer> result =  new ArrayList<Integer>();
+        Map<Integer,Integer> m = new HashMap<Integer,Integer>();
+        for(int i=0;i<nums.length;i++){
+            if(m.containsKey(nums[i]))
+                m.put(nums[i],m.get(nums[i])+1);
+            else m.put(nums[i],1);
+        }
+        while(k>0){
+            k--;
+            int temp=0;
+            int top_k=0;
+            for(Integer shuzi:m.keySet()){
+                if(m.get(shuzi)>temp){
+                    temp=m.get(shuzi);
+                    top_k=shuzi;
+                }
+            }
+            result.add(top_k);
+            m.remove(top_k);
+            
+        }
+        return result;
+    }
+}
