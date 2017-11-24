@@ -1,0 +1,38 @@
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        int len=nums.length;
+        
+        int first=0;
+        int last=len-1;
+        int mid=(last-first)/2+first;
+       
+        while(first<last){
+            if(mid%2!=0) {
+                
+            if(nums[mid]==nums[mid+1]){
+                last=mid-1;                         //如果mid为奇数，说明两边都是奇数长度，不包含mid处的数，以使得下一个序列为奇数长度
+                mid=(last-first)/2+first;
+            }
+            else {
+                first=mid+1;
+                mid=(last-first)/2+first;
+            }
+                
+            }
+            else {
+                
+                if(nums[mid]!=nums[mid+1]){
+                last=mid;                           //如下
+                mid=(last-first)/2+first;
+            }
+            else {
+                first=mid;                         //因为mid是奇数说明两边的长度时偶数，为了保证 查找的序列必须为奇数长度 是，
+                mid=(last-first)/2+first;          //所以将原来的mid处的数包含
+            }
+                
+            }
+            
+        }
+        return nums[mid];
+    }
+}

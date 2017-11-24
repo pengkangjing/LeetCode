@@ -1,0 +1,58 @@
+class Solution {
+    public int minSubArrayLen(int s, int[] nums) {    //O（n）
+        
+        int min=nums.length+1;
+        int start=0;
+        int end = 0;
+        int sum=0;
+        while(true){
+            
+            if(sum<s){
+                
+                if(end==nums.length)
+                    break;
+                sum+=nums[end++];
+        
+            }
+            else if(sum>=s){
+                System.out.println(sum);
+                if(end-start<min){
+                    min=end-start;
+                }
+                sum-=nums[start];
+                    start++;
+            }       
+        }
+        
+       
+        if(min==nums.length+1)
+            return 0;
+       else  return min;
+    }
+}
+
+/*
+ public int minSubArrayLen(int s, int[] nums) {    //简单的方法
+        
+        int min=nums.length+1;
+        int count=0;
+        for(int i=0;i<nums.length;i++){
+            
+            int j=i;
+            int sum=0;
+            while((sum<s)&&(j<nums.length)){
+                
+                sum+=nums[j];
+                j++;
+                
+            }
+            if(sum>=s){
+                 min=Math.min(j-i,min);
+               // System.out.println(min);
+            }
+        }
+        if(min==nums.length+1)
+            return 0;
+       else  return min;
+    }
+*/

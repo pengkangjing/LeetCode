@@ -1,0 +1,69 @@
+class Solution {
+    public int magicalString(int n) {
+    int count=n;
+    int changdu=1;
+    int shuzi=1;
+    int result=0;
+    List<Integer> temp = new ArrayList<Integer>();
+    int i=0;
+    while(count>0){
+        
+        temp.add(shuzi);
+        changdu=temp.get(i++);
+        count-=changdu;
+        if(changdu==2)
+            temp.add(shuzi);
+        
+        if(shuzi==1){
+            
+            result+=changdu;
+            if(count<0){      //这里的处理很重要  防止出现加上2位之后大于n       可以把这行注释了 输入4看看   当n=4  s=12211 会输出3
+                result--;
+            }
+            shuzi=2;
+        }
+        else if(shuzi==2){
+            
+            shuzi=1;
+        }
+        
+       
+        
+    }
+        return result;
+    }
+}class Solution {
+    public int magicalString(int n) {
+    int count=n;
+    int changdu=1;
+    int shuzi=1;
+    int result=0;
+    List<Integer> temp = new ArrayList<Integer>();
+    int i=0;
+    while(count>0){
+        
+        temp.add(shuzi);
+        changdu=temp.get(i++);
+        count-=changdu;
+        if(changdu==2)
+            temp.add(shuzi);
+        
+        if(shuzi==1){
+            
+            result+=changdu;
+            if(count<0){      //这里的处理很重要  防止出现加上2位之后大于n       可以把这行注释了 输入4看看   当n=4  s=12211 会输出3
+                result--;
+            }
+            shuzi=2;
+        }
+        else if(shuzi==2){
+            
+            shuzi=1;
+        }
+        
+       
+        
+    }
+        return result;
+    }
+}

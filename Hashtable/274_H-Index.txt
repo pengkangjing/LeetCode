@@ -1,0 +1,36 @@
+class Solution {
+    public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        int len=citations.length;
+        int result=0;
+        for(int i=0;i<len;i++){                              //这里的重点是h 即len-i
+            
+           //if(( citations[i]>=len-i)&&(result<=len-i))    //( citations[i]>=len-i)确保len-i个数>=citations[i]
+            //       result=len-i;                          //(result<=len-i)       确保长度最长 只要有一个满足就不查了；
+            
+            if( citations[i]>=len-i)                       //对上面的两行改一下          
+                return len-i;
+        }
+        return result;
+    }
+}
+/*
+ public int hIndex(int[] citations) {
+        Arrays.sort(citations);
+        int len=citations.length;
+        int result=0;
+        for(int i=0;i<len;i++){
+            
+          if( len-i>=citations[i]){               // 这个思想根本不对  居然还能A过了 说明这测试用例不够，有问题
+               if(result<=citations[i])
+                   result=citations[i];
+           }
+            else {
+                if(result<=len-i)
+                    result=len-i;
+            }
+        }
+        return result;
+    }
+ 
+*/

@@ -1,0 +1,45 @@
+class Solution {
+    
+    public int threeSumClosest(int[] nums, int target) {
+    
+        int sum=0;
+        int diff=Integer.MAX_VALUE;
+        int result=0;
+        
+        Arrays.sort(nums);
+        for(int i=0;i<nums.length-2;i++){
+            
+            //if((nums[i]>target)&&(diff!=Integer.MAX_VALUE))                //不能加这两行 报错 可以看最后一次提交的错误思考一下
+             //   break;                                                     //因为 diff 可能是一个很小很小的数  而 nums[i]即使大于target，最后
+                                                                             //的差也要比之前的小;
+            for(int j=i+1;j<nums.length-1;j++){
+                
+               // if((nums[i]+nums[j]>target)&&(diff!=Integer.MAX_VALUE))
+                  //   break;
+                for(int k=j+1;k<nums.length;k++){
+                    
+                    if(nums[i]+nums[j]+nums[k]==target){      //如果找到了和target相等的sum 直接返回
+                        return target;
+                    }
+                    else if(nums[i]+nums[j]+nums[k]<target){               //如果小于目标 则继续查找
+                        if(diff>Math.abs(target-(nums[i]+nums[j]+nums[k]))){
+                        diff=Math.abs(target-(nums[i]+nums[j]+nums[k]));
+                        result=nums[i]+nums[j]+nums[k];
+                        } 
+                    }
+                    else {                                                  //如果大于目标  
+                        
+                        if(diff>Math.abs(target-(nums[i]+nums[j]+nums[k]))){    //判断误差是否更小
+                        diff=Math.abs(target-(nums[i]+nums[j]+nums[k]));
+                        result=nums[i]+nums[j]+nums[k];
+                        } 
+                        else break;                                            //如果更大 则直接跳出此次循环 后面的不用算了
+                        
+                    }
+                }
+            }
+        }
+       
+        return result;
+    }
+}

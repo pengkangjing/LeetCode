@@ -1,0 +1,20 @@
+class Solution {
+    public boolean checkPossibility(int[] nums) {                       //这道题是我通过率最低的一道题了 搞不清为啥一直有问题
+        int count =0;                                                   //替换次数
+        for(int i=0;i<nums.length-1;i++){                               //扫描数组
+            
+            if(nums[i]>nums[i+1]){                                      //如果出现前面的比后面的大 替换次数加1
+                if(count==1)                                            //如果之前已经出现替换了 那现在又需要替换 那次数大于1 直接返回
+                    return false;
+                count++;                                                //加1
+            if((i==0)||(i==nums.length-2)||(nums[i-1]<=nums[i+1])||(nums[i]<=nums[i+2]))   //如果出现在第一个和倒数第二个 直接跳过不进行后面的判断 
+               
+                    continue;                                         //后面两种情况 分别对应 把nums[i]替换成nums[i-1]和把nums[i+1]替换成nums[i] 
+            else return false;
+            }
+        }
+        return true;
+    }
+
+}
+
