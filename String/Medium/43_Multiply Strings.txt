@@ -1,0 +1,31 @@
+class Solution {
+    public String multiply(String num1, String num2) {
+        if((num1.equals("0"))||(num2.equals("0")))
+            return "0";
+        StringBuffer sb = new StringBuffer();
+        int len1=num1.length();
+        int len2=num2.length();
+        int[] temp = new int[len1+len2];
+        for(int i=len1-1;i>=0;i--){
+            
+            for(int j=len2-1;j>=0;j--){
+                
+                temp[len1-i+len2-j-1]+=Integer.valueOf(num2.substring(j,j+1))*Integer.valueOf(num1.substring(i,i+1));
+              //  System.out.println("location    "+(len1-i+len2-j-1));
+              //  System.out.println(temp[len1-i+len2-j-1]);
+            }
+        }
+        for(int k=1;k<len1+len2;k++){
+            
+           // System.out.println(k+"    "+temp[k]);
+           if(k==len1+len2-1){
+               sb.insert(0,temp[k]);
+               break;
+           } 
+           sb.insert(0,temp[k]%10);
+           temp[k+1]+=temp[k]/10;
+            
+        }
+        return sb.toString();
+    }
+}
