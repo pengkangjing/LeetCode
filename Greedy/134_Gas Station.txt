@@ -1,0 +1,29 @@
+class Solution {
+   public int canCompleteCircuit(int[] gas, int[] cost) {
+        
+        int que=0;
+        int start=0;
+        int duo=0;
+        for(int i=0;i<gas.length;i++){
+            
+            
+            if(gas[i]+duo<cost[i]){
+               
+              que+=cost[i]-gas[i]-duo;
+              duo=0;
+              start=i+1;
+               }
+             else {
+             
+             duo= gas[i]+duo-cost[i];
+             }
+            
+        }
+        if(que>duo)
+          return -1;
+        else return start;
+
+
+        
+    }
+}

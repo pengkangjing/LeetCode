@@ -1,0 +1,36 @@
+class Solution {
+    public int minMoves2(int[] nums) {
+        Arrays.sort(nums);
+        int len=nums.length;                        //思想是以中位数为基准 进行靠拢
+        int mid=0;         
+        if(len%2!=0)
+            mid=nums[len/2];                       //长度是奇数   中位数 直接去最中间的
+        else mid=(nums[len/2]+nums[len/2-1])/2;    //长度是偶数   中位数 去相邻两项相加 在相除 
+                                                   //这里两项和可能是奇数 除2可能为小数 这个没关系 向上取整和向下取整 最后得到的结果是一样的
+        int result=0;
+        for(int j=0;j<len;j++){
+            
+            result+=Math.abs(nums[j]-mid);
+        }
+        return result;
+    }
+}
+/*
+ public int minMoves2(int[] nums) {
+        int len=nums.length;
+        int sum=0;
+        for(int i=0;i<len;i++){          //这种方法是错误的
+            
+            sum+=nums[i];
+            
+        }
+        
+        int mean=Math.round(sum/len);
+        int result=0;
+        for(int j=0;j<len;j++){
+            
+            result+=Math.abs(nums[j]-mean);
+        }
+        return result;
+    }
+*/

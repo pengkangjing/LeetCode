@@ -1,0 +1,30 @@
+class Solution {
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> result = new ArrayList<Integer>();
+        for(int i=left;i<=right;i++){
+            
+            if(issddn(i))
+                result.add(i);
+        }
+        return result;
+        
+    }
+    
+    private boolean issddn(int num){
+        
+        int k=num;
+        
+        while(k>0){
+            
+            
+            int temp=k%10;
+            if(temp==0)
+                return false;
+            if(num%temp!=0)
+                return false;
+            k=k/10;
+            
+        }
+        return true;
+    }
+}

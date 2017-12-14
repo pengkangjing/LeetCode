@@ -1,0 +1,43 @@
+class Solution {
+       public int totalHammingDistance(int[] nums) {                 
+          int total=0;
+          
+          for(int i=0;i<32;i++){                          //复杂度 32n~O（n） 常量空间
+              int temp=0;
+              for(int j=0;j<nums.length;j++){                    
+                  temp+=(nums[j]>>i)&1;
+                  
+              }
+              total+=temp*(nums.length-temp) ;            //原理在于 所有数字在每一位的上1的个数temp
+          }                                               //temp 个数在某位上为1 另外 num.Length-temp 个数在该位上为0， 两两计算汉明距离的时候 
+                                                          //temp*（nums.length-temp）   两个不同集合的个数相乘
+	       return total ; 
+		 
+	    }
+   
+}
+/*
+ public int totalHammingDistance(int[] nums) {                   //超时   排序O（nlogn） 
+        Arrays.sort(nums);
+		 int total=0;
+         int temp=0;
+		 for(int i=0;i<nums.length-1;i++){                         //下面每两个算一次汉明 复杂度O(n^2)
+			 if((i>0)&&(nums[i]==nums[i-1])){
+                 total+=temp;
+                 continue;
+             }
+             temp=0;    
+			 for( int j=i+1;j<nums.length;j++){
+				temp+=hammingDistance(nums[i], nums[j]);
+			 }
+             total+=temp;
+		 }
+		 
+	       return total ; 
+		 
+	    }
+    public int hammingDistance(int x, int y) {
+        
+        return Integer.bitCount(x^y);
+    }
+*/

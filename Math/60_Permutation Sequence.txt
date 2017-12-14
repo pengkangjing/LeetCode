@@ -1,0 +1,39 @@
+class Solution {
+    public String getPermutation(int n, int k) {
+        
+        StringBuffer sb=new StringBuffer();
+        
+        int jiechen=1;
+        
+        List<Integer> temp=new ArrayList<Integer>();
+        for(int i=1;i<=n;i++){
+            temp.add(i);
+            jiechen*=i;
+        }
+        
+        while(!temp.isEmpty()){
+            
+            jiechen=jiechen/n;
+            if(k==0)
+            {
+                 sb.append(temp.get(temp.size()-1));
+                 temp.remove(temp.size()-1);
+            }
+            else if(k%jiechen!=0){
+                sb.append(temp.get(k/jiechen));
+                temp.remove(k/jiechen);
+               
+            }                                                //  k/jiechen=x k%jiechen>1  这一位取x       k/jiechen=x    k%jiechen=0 这位取x-1
+             
+            else {                                       //如果整除，取k/jiechen-1位
+                 sb.append(temp.get(k/jiechen-1));
+                 temp.remove(k/jiechen-1);
+            }
+           
+             k=k%jiechen;
+            n--;
+        }
+        
+        return sb.toString();
+    }
+}

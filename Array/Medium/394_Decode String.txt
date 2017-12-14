@@ -1,0 +1,50 @@
+class Solution {
+    public String decodeString(String s) {
+        StringBuffer sb = new StringBuffer();
+        int loc=0;
+        for(int i=0;i<s.length();i++){
+            
+            while((s.charAt(i)>='a')&&(s.charAt(i)<='z')){      //处理没有括号包括的字母   比如 "2[abc]3[cd]ef" 中的ef
+                sb.append(s.charAt(i));
+                i++;
+                if(i==s.length())
+                return sb.toString();
+            }
+           
+            int kuohao=0;
+            loc=i;                                            //记录数字起始位置
+            while(s.charAt(i)!='['){                          //找到第一个左括号
+                i++;
+                
+            }
+            kuohao++;                                        //记录左括号个数 这个主要是用于和右括号匹配以找到 匹配当前数字的右括号
+            int len=Integer.valueOf(s.substring(loc,i));     //记录数字
+            i++;
+            loc=i;
+            StringBuffer str = new StringBuffer();           //记录对应数字的字符串
+            while((s.charAt(i)>='a')&&(s.charAt(i)<='z')){
+                str.append(s.charAt(i++));
+            }
+            if(s.charAt(i)!=']'){                            //有嵌套的 num[String]
+                loc=i;
+                while(kuohao>0){                             //找到匹配数字的右括号
+                    
+                    i++;
+                    if(s.charAt(i)=='[')
+                        kuohao++;
+                    if(s.charAt(i)==']')
+                        kuohao--;
+                    
+                }
+                str.append(decodeString(s.substring(loc,i)));    //递归调用该函数 处理嵌套的 num[String]
+                
+            }
+             for(int j=0;j<len;j++){
+               
+                    sb.append(str);                       //添加 重复对应数字次的 字符串
+                }
+               
+        }
+        return sb.toString();
+    }
+}

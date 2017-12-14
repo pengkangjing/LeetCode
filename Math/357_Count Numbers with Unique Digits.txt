@@ -1,0 +1,24 @@
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+        if(n==0)
+            return 1;
+        int result=0;
+        for(int i=1;i<=n;i++){
+            if(i==1)                //当只有1位时 0开头是合法的 所以0-9 有10种
+            {
+                result+=10;
+                continue;
+            }
+            int j=i;
+            int k=9;
+            int temp=9;             //最左边的数有9种选择  本来应该0-9 有10种 但第一位不能是0
+            while(j>1){
+                temp*=k--;          //第二位有9种选择 第三位有8种选择  依次递减
+                j--;
+            }
+            result+=temp;
+            
+        }
+       return result;
+    }
+}

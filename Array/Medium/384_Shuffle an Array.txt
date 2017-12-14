@@ -1,0 +1,35 @@
+class Solution {
+    private int[] num;
+    public Solution(int[] nums) {
+        num=nums;
+    }
+    
+    /** Resets the array to its original configuration and return it. */
+    public int[] reset() {
+        return num;
+    }
+    
+    /** Returns a random shuffling of the array. */
+    public int[] shuffle() {
+        int[] result=new int[num.length];
+        Random rnd = new Random();
+        List<Integer> index=new ArrayList<Integer>();
+        while(index.size()<num.length){
+            int temp=rnd.nextInt(num.length);
+            if(!index.contains(temp))
+                index.add(temp);
+        }
+        for(int l=0;l<num.length;l++){
+            result[l]=num[index.get(l)];
+        }
+         
+      return result;  
+    }
+}
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution obj = new Solution(nums);
+ * int[] param_1 = obj.reset();
+ * int[] param_2 = obj.shuffle();
+ */

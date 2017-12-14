@@ -1,0 +1,75 @@
+class Solution {
+    public String intToRoman(int num) {
+        StringBuffer result = new StringBuffer();
+        
+        int qian=num/1000;
+        num=num%1000;
+        for(int i=0;i<qian;i++){
+            result.append("M");
+        }
+        if(num>=900){
+             result.append("CM");
+             num=num-900;
+        }
+        if(num>=500){
+            
+             result.append("D");
+             num=num-500;
+        }
+        if(num>=400){
+
+             result.append("CD");
+             num=num-400;
+            
+        }
+        if(num>=100){
+            
+            int bai=num/100;
+            for(int j=0;j<bai;j++){
+                 result.append("C");
+            }
+            num=num%100;
+            
+        }
+        if(num>=90){
+             result.append("XC");
+             num=num-90;
+        }
+        if(num>=50){
+             result.append("L");
+             num=num-50;
+        }
+        if(num>=40){
+            result.append("XL");
+            num=num-40;
+        }
+        if(num>=10){
+            int shi=num/10;
+            for(int k=0;k<shi;k++){
+                 result.append("X");
+            }
+            num=num%10;
+        }
+        if(num>=9){
+            
+            result.append("IX");
+            num=num-9;
+            
+        }
+        if(num>=5){
+            result.append("V");
+            num=num-5;
+        }
+        if(num>=4){
+             result.append("IV");
+             num=num-4;
+        }
+        if(num>=1){
+            for(int t=0;t<num;t++){
+                 result.append("I");
+            }
+        }
+        
+        return result.toString();
+    }
+}
