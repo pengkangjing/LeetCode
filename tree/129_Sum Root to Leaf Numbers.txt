@@ -1,0 +1,74 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int sumNumbers(TreeNode root) {
+        int result =0;
+        if(root==null)
+            return result;
+        List<Integer> all = new ArrayList<Integer>();
+        findnum(root,0,all);
+        for(int k=0;k<all.size();k++)
+            result+=all.get(k);
+        return result;
+    }
+    private void findnum(TreeNode root,int num,List<Integer> result){
+        
+        if((root.left==null)&&(root.right==null)){
+             result.add(num*10+root.val);
+            
+        }
+     
+        if(root.left!=null){
+           findnum(root.left,num*10+root.val,result);
+       
+        }
+        
+        if(root.right!=null){
+           findnum(root.right,num*10+root.val,result);
+        }
+       
+    }
+}
+
+/*
+private List<Integer> findnum(TreeNode root,int depth){                //这个写的有问题  没有处理好 连续的0 详情请见提交错误
+        List<Integer> result = new ArrayList<Integer>();
+        
+        if(root==null)
+            return result;
+        if((root.left==null)&&(root.right==null)){
+             result.add(root.val);
+            return result;
+        }
+       
+        
+        if(root.left!=null){
+            List<Integer> temp = findnum(root.left,);
+            for(int i=0;i<temp.size();i++){
+                int addnum=10;
+                while(addnum<temp.get(i))
+                    addnum*=10;
+                result.add(root.val*addnum+temp.get(i));
+            }
+            
+        }
+        
+        if(root.right!=null){
+            List<Integer> temp = findnum(root.right);
+            for(int j=0;j<temp.size();j++){
+                int addnum=10;
+                while(addnum<temp.get(j))
+                    addnum*=10;
+                result.add(root.val*addnum+temp.get(j));
+            }
+        }
+        return result;
+    }
+*/

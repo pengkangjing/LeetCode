@@ -1,0 +1,55 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {                    //改编自 给定前序和中序排列那道题
+        
+        if(postorder.length==0)
+            return null;
+        
+       int[] left_inorder;
+       int[] right_inorder;
+       int[] left_postorder;
+       int[] right_postorder;
+        
+       TreeNode root =new TreeNode(postorder[postorder.length-1]);
+       if(postorder.length==0)
+            return root;
+        
+       for(int i=0;i<inorder.length;i++){
+           if(inorder[i]==postorder[postorder.length-1]){
+           
+               left_inorder=new int[i];
+               for(int j=0;j<i;j++)
+                   left_inorder[j]=inorder[j];
+             
+               right_inorder=new int[inorder.length-i-1];
+               for(int k=i+1;k<inorder.length;k++)
+                   right_inorder[k-i-1]=inorder[k];
+             
+               left_postorder=new int[i];
+               for(int l=0;l<i;l++)
+                   left_postorder[l]=postorder[l];
+               
+               right_postorder= new int[postorder.length-i-1];
+               for(int m=i;m<postorder.length-1;m++)
+                   right_postorder[m-i]=postorder[m];
+               
+               root.left=buildTree(left_inorder,left_postorder);
+               root.right=buildTree(right_inorder,right_postorder);
+          
+               break;
+           }
+       } 
+       
+       return root;
+        
+    }
+}
+

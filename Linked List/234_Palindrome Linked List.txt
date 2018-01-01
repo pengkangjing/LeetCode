@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+     int count=0;                     
+     ListNode temp=head;
+        while(temp!=null){                             //计算链表的长度 以对链表切分成两半
+            count++;
+            temp=temp.next;
+        }
+     if(count<2)                                       //链表长度小于2时，直接返回true
+         return true;
+        
+     int num=count/2;
+      
+     
+     ListNode temp1=head;                              //用来反转前半个链表
+     ListNode temp2=temp1.next;   
+     ListNode temp3;
+  
+        
+     while(num>1){                                   //只有前半个链表的长度大于1是才需要反转
+   
+         temp3=temp2.next;
+         
+         temp2.next=temp1;
+         temp1=temp2;
+         temp2=temp3;
+         
+         num--;
+     }
+        
+    if(count%2==1)                                  //如果链表长度为奇数 则指向后半个链表的指针得往后移动一位
+        temp2=temp2.next;
+    
+     while(temp2!=null){                         //以后半个链表的指针为null表示结束   因为头指针没有指向null
+         if(temp1.val!=temp2.val)                //判断回文
+             return false;
+         temp1=temp1.next;
+         temp2=temp2.next;
+     }
+         
+        
+    return true;
+    }
+}

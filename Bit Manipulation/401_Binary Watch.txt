@@ -1,0 +1,45 @@
+class Solution {
+    
+     private List<String> list=new ArrayList<String>();
+    
+	 public List<String> readBinaryWatch(int num) {
+         
+          Map<Integer,List<String>>  map = new HashMap<Integer,List<String>>();
+		  haha(map);
+         
+	      for(int hour_LED=0;((hour_LED<=4)&&(hour_LED<=num));hour_LED++){
+	    	  int minute_LED=num-hour_LED;
+	    	  if(minute_LED<6){
+	    		  get_time(map,hour_LED,minute_LED);
+	    	  }
+	    	  
+	      }  
+	      return list;
+	    }
+    private void get_time(Map<Integer,List<String>> map, int hour_LED, int minute_LED) {
+		List<String> hour = map.get(hour_LED);
+       // System.out.println(hour.get(0));
+		List<String> minute = map.get(minute_LED);
+		for(int i=0;i<hour.size();i++){
+            if((hour.get(i).charAt(0)>'1')||((hour.get(i).charAt(0)=='1')&&(hour.get(i).charAt(1)>'1')))
+                continue;
+			for(int j=0;j<minute.size();j++){
+				list.add((hour.get(i).charAt(0)=='0'?hour.get(i).substring(1):hour.get(i))+":"+minute.get(j));
+			}
+		}
+		
+	}
+	
+    private void haha(Map<Integer,List<String>> m){
+        for(int k=0;k<60;k++){
+            String temp="";
+            if(k<10)
+                temp="0"+String.valueOf(k);
+            else temp=String.valueOf(k);
+            if(!m.containsKey(Integer.bitCount(k)))
+                m.put(Integer.bitCount(k),new ArrayList<String>());
+            
+            m.get(Integer.bitCount(k)).add(temp);
+        }
+    }
+}

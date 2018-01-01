@@ -1,0 +1,102 @@
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+public class Solution {
+   public RandomListNode copyRandomList(RandomListNode head) {      //这是在参考答案的提示下 自己写的
+
+        RandomListNode result=head;
+        Map<RandomListNode,RandomListNode>  rnd  = new HashMap<RandomListNode,RandomListNode>();
+         
+        while(head!=null){
+         
+          rnd.put(head,new RandomListNode(head.label));
+          head=head.next;
+   
+        }
+        
+        for(RandomListNode node :rnd.keySet()){
+            rnd.get(node).next=rnd.get(node.next);
+            if(node.random==null)
+                rnd.get(node).random=null;
+            else rnd.get(node).random= rnd.get(node.random);
+        }
+        System.out.println(rnd.size());
+       return rnd.get(result); 
+    }
+}
+/*
+ public RandomListNode copyRandomList(RandomListNode head) {                //这是看答案找到超时原因后对第一版的修改
+        
+        if(head==null)
+            return null;
+        
+        Map<RandomListNode,RandomListNode>  rnd  = new HashMap<RandomListNode,RandomListNode>();
+        
+        RandomListNode result = new RandomListNode(head.label) ;           //相比较参考答案 参考答案把复制之后的链表节点间的连接放在
+        RandomListNode temp=result;                                        //后面的循环中处理 代码简洁多了   自己解题的思想和答案差不多
+                                                                           //但是在实现上差远了 
+        while(head.next!=null){
+         
+          result.next = new RandomListNode(head.next.label) ;
+         if(head.random==null)
+             result.random=null;
+          rnd.put(head,result);                                            //修改了这里 原来是 rnd.put(head,result);
+            
+          head=head.next;
+          result=result.next;
+        }
+        rnd.put(head,result);                                             //修改了这里 原来是 rnd.put(head,result);
+        result.next=null;
+        
+        
+        for(RandomListNode node :rnd.keySet()){                            //修改了这里 这个地方相对于第一版 只有一层循环 解决了超时的问题
+           rnd.get(node).random=rnd.get(node.random);
+        }
+        
+       return temp; 
+    }
+*/
+/*
+public RandomListNode copyRandomList(RandomListNode head) {   //这是自己写的第一版答案 超时
+        
+        if(head==null)
+            return null;
+        
+        Map<RandomListNode,RandomListNode>  rnd  = new HashMap<RandomListNode,RandomListNode>();
+        
+        RandomListNode result = new RandomListNode(head.label) ;
+        RandomListNode temp=result;
+        
+        while(head.next!=null){
+         
+          result.next = new RandomListNode(head.next.label) ;
+         if(head.random==null)
+             result.random=null;
+          rnd.put(head,result);
+            
+          head=head.next;
+          result=result.next;
+        }
+        rnd.put(result,head);
+        result.next=null;
+        
+        
+        for(RandomListNode node :rnd.keySet()){                 
+            if(rnd.get(node).random==null)
+                continue;
+             for(RandomListNode node_temp :rnd.keySet()){                //超时的原因在这里 因为这边不能直接用get函数 所以进行遍历增加了一层循环
+                 if(rnd.get(node_temp)==rnd.get(node).random){           //原因在于自己把 map中的head和result放反了 好好想想原因
+                     node.random=node_temp;
+                     break;
+                 }
+                     
+             }
+        }
+       return temp; 
+    }
+*/
