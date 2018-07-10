@@ -1,0 +1,67 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+      
+        List<List<Integer>>  result = new ArrayList<List<Integer>>();
+        Arrays.sort(nums);
+        result.add(new ArrayList<Integer>());                                      //第一次提交错误 出现重复 即使顺序不一样项一样就算重复
+                                                                                   //加了排序之后就好了
+        List<Integer> temp = new ArrayList<Integer>();                                           //第*行
+        for(int i=0;i<nums.length;i++){
+            
+           // List<Integer> temp = new ArrayList<Integer>();                                   // 第~行
+            if((i>0)&&(nums[i]==nums[i-1]))
+               continue;
+            process(result,temp,i,nums);
+            
+            temp.remove(temp.size()-1);      //注意记得加这一行 因为上一行结束后temp中还有nums[i];    如果不想加这一行 可以把第*行放到第~行
+          
+        }
+        return result;
+        
+    }
+    private void process(List<List<Integer>> result,List<Integer> temp,int i,int[] nums){
+             
+            
+            temp.add(nums[i]);
+            result.add(new ArrayList<Integer>(){{addAll(temp);}} );
+            for(int j=i+1;j<nums.length;j++){
+                
+                 if((j>i+1)&&(nums[j]==nums[j-1]))   
+                   continue;
+                 process(result,temp,j,nums);
+                temp.remove(temp.size()-1);
+            }
+        
+        
+    }
+}
+
+/*
+class Solution {                                                      //第一次写的错误答案 未通过
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        result.add(new ArrayList<Integer>());
+        
+        for(int i=0;i<=nums.length-1;i++){
+            
+            for(int j=1;j<=nums.length-i;j++){
+                
+                List<Integer> temp = new ArrayList<Integer>();
+                for(int k=i;k<i+j;k++){
+                    
+                    temp.add(nums[k]);
+                }
+                if(!result.contains(temp))
+                    result.add(temp);
+                
+                
+            }
+                
+        }
+        return result;
+        
+    }
+}
+*/
+ 

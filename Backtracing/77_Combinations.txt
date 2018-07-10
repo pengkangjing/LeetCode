@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();                 //回溯法一次过  很高兴
+        
+         for(int i=1;i<=n-k+1;i++){
+                
+                List<Integer> item = new ArrayList<Integer>(); 
+                add(item,i,1,result,n,k);
+            }
+        return result;
+    }
+    private void add(List<Integer> item ,int num,int temp,List<List<Integer>> result,int n,int k){
+        item.add(num);
+        if(temp==k)
+        {
+           result.add(new ArrayList<Integer>(){{addAll(item);}} );  
+        }
+        else {
+            for(int i=num+1;i<=n-(k-temp)+1;i++){
+               add(item,i,temp+1,result,n,k);
+               item.remove(item.size()-1);
+            }
+            
+        }
+    }
+}
+

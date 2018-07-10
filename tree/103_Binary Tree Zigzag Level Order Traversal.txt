@@ -1,0 +1,45 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {                      //自己写的 用到了队列  
+        
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if(root==null)
+            return result;
+        Queue<TreeNode> dq = new LinkedList<TreeNode>();
+        dq.offer(root);
+        return getOrder(1,dq,result);
+    }
+    private List<List<Integer>> getOrder(int reverse,Queue<TreeNode> dq,List<List<Integer>> result){
+        
+        List<Integer>  level = new ArrayList<Integer>();
+        int size = dq.size();
+        while(size>0){
+            size--;
+            
+            TreeNode temp = dq.poll();
+            if(reverse==-1)
+                level.add(0,temp.val);                           //list接口没有insert 方法 要插入指定位置 只有add(index,value)
+            else level.add(temp.val);
+            if(temp.left!=null)
+                dq.offer(temp.left);
+            if(temp.right!=null)
+                dq.offer(temp.right);
+            
+        }
+        reverse=-reverse;
+        
+        result.add(level);
+        if(dq.isEmpty())
+            return result;
+        else return getOrder(reverse,dq,result);
+        
+    }
+}

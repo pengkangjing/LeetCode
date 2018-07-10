@@ -1,0 +1,36 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+      
+        List<List<Integer>>  result = new ArrayList<List<Integer>>();
+        
+        result.add(new ArrayList<Integer>());
+        
+        List<Integer> temp = new ArrayList<Integer>();                                           //第*行
+        for(int i=0;i<nums.length;i++){
+            
+           // List<Integer> temp = new ArrayList<Integer>();                                   // 第~行
+            process(result,temp,i,nums);
+            
+            temp.remove(temp.size()-1);      //注意记得加这一行 因为上一行结束后temp中还有nums[i];    如果不想加这一行 可以把第*行放到第~行
+          
+        }
+       
+        
+        return result;
+        
+    }
+    private void process(List<List<Integer>> result,List<Integer> temp,int i,int[] nums){
+        
+            temp.add(nums[i]);
+            result.add(new ArrayList<Integer>(){{addAll(temp);}} );
+            for(int j=i+1;j<nums.length;j++){
+                
+                 process(result,temp,j,nums);
+                temp.remove(temp.size()-1);
+            }
+        
+        
+    }
+}
+
+ 

@@ -1,0 +1,89 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {                          
+         
+        int result=0;
+        List<Character> list = new ArrayList<Character>();
+    
+        for(int i=0;i<s.length();){
+
+            while((i<s.length())&&(!list.contains(s.charAt(i)))){
+                list.add(s.charAt(i++));
+            }
+            
+            if(list.size()>result)
+                result=list.size();
+            if(i==s.length())
+                return result;
+            
+            while(list.get(0)!=s.charAt(i))
+                list.remove(0);
+            list.remove(0);
+            
+            }
+        
+        return result;
+    }
+}
+
+/*
+public int lengthOfLongestSubstring(String s) {                          //超时
+         
+        int max=0;
+        Map<Character,Integer> map =  new HashMap<Character,Integer>();     //下面的简洁版本
+        
+        for(int i=0;i<s.length();i++){
+            map.put(s.charAt(i),i);
+            int j=i+1;
+            
+            while((j<s.length())&&(!map.containsKey(s.charAt(j)))){
+                map.put(s.charAt(j),j);
+                j++;
+            }
+            if(map.size()>max)
+                        max=map.size();
+            if(j==s.length())
+               break;
+            i=map.get(s.charAt(j));
+            map.clear();
+            
+            }
+        
+        return max;
+    }
+
+ public int lengthOfLongestSubstring(String s) {                         //超时
+        
+        int max=0;
+        Map<Character,Integer> map =  new HashMap<Character,Integer>();
+        
+        for(int i=0;i<s.length();i++){
+            map.put(s.charAt(i),i);
+            int j=i+1;
+            
+            while((j<s.length())&&(!map.containsKey(s.charAt(j)))){
+                map.put(s.charAt(j),j);
+                j++;
+            }
+            if(map.size()>max)
+                        max=map.size();
+            i=map.get(s.charAt(j));
+            map.clear();
+            for(;j<s.length();j++){
+                if(map.containsKey(s.charAt(j))){
+                    if(map.size()>max)
+                        max=map.size();
+                    i=map.get(s.charAt(j));
+                    map.clear();
+                    
+                    break;
+                }
+                else map.put(s.charAt(j),j);
+              if(j==s.length())
+                  break;
+            }
+        }
+       if(map.size()>max)
+                max=map.size(); 
+        return max;
+    }
+*/

@@ -1,0 +1,50 @@
+class Solution {
+    private String result="";
+    private String[] words;
+    private class TreeNode{
+        char c;
+        
+        String prefix;
+        boolean isWord=false;
+        TreeNode[] next ;
+        TreeNode(){
+            this.next = new TreeNode[26];
+        }
+        TreeNode(char c,String prefix){
+            this.c = c;
+            this.next =  new TreeNode[26];
+            this.prefix = prefix;
+        }
+    }
+    public String longestWord(String[] words) {
+        TreeNode root = new TreeNode();
+        this.words=words;
+        for(int i=0;i<words.length;i++){
+            TreeNode p=root;
+            for(int j=0;j<words[i].length();j++){
+                if(p.next[words[i].charAt(j)-'a']==null)
+                    p.next[words[i].charAt(j)-'a'] = new TreeNode(words[i].charAt(j),words[i].substring(0,j+1));
+                p=p.next[words[i].charAt(j)-'a'];
+            }
+            p.isWord=true;
+        }
+     
+        find(root);
+        return result;
+    }
+    public void find(TreeNode t){
+        TreeNode s=t;
+        for(int j=0;j<26;j++){
+            if((s.next[j]!=null)&&(s.next[j].isWord)){
+                 if(s.next[j].prefix.length()>result.length())
+                   result = s.next[j].prefix;
+                else if(s.next[j].prefix.length()==result.length()){
+                   result=s.next[j].prefix.compareTo(result)<0?s.next[j].prefix:result; 
+                }
+                 //System.out.println(result+"   hahah"); 
+               find(s.next[j]); 
+             
+            }
+        }
+    }
+}

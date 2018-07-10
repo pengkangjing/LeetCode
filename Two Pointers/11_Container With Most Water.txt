@@ -1,0 +1,86 @@
+class Solution {
+    public int maxArea(int[] height) {
+      
+        int left=0;
+        int right=height.length-1;
+        int result=(right-left)*Math.min(height[left],height[right]);               //双指针 这道题错了好多次 看看自己之前提交的错误
+        
+        for(;left<right;){
+            
+            if(height[left]<height[right]){
+                int i=left+1;
+                while(i<right){
+                    
+                    if(height[i]>height[left]){
+                        
+                        if(((right-i)*Math.min(height[i],height[right]))>result)
+                        result=(right-i)*Math.min(height[i],height[right]);
+                        left=i;
+                        break;
+                    }
+                    else i++;    
+                    
+                }
+                if(i==right)
+                    return result;
+                
+            }
+            else {
+                int j=right-1;
+                while(j>left){
+                    
+                    if(height[j]>height[right]){
+                        if(((j-left)*Math.min(height[j],height[left]))>result)
+                        result=(j-left)*Math.min(height[j],height[left]);
+                        right=j;
+                        break;
+                    }
+                    else j--;    
+                    
+                }
+                if(j==left)
+                    return result;
+            }
+        }
+      return result;  
+    }
+}
+
+/*
+ int result=0;
+        
+        /*
+        int left=0;
+        int right=height.length-1;
+        result=(right-left+1)*Math.min(height[left],height[right]);
+        
+        while(left<right){
+            
+            
+            
+        }*/     
+     /*   
+        int last=0;
+        int lastj=height.length-1;
+        
+        for(int i=0;i<height.length-1;i++){                             //暴力搜索 超时
+            
+            if(height[i]<height[last])
+                continue;
+            
+            for(int j=height.length-1;j>i;j--){
+                if(height[j]<height[lastj])
+                    continue;
+                int temp=Math.min(height[i],height[j])*(j-i);
+                if(temp>result){
+                    result=temp;
+                    last=i;
+                }
+                    
+            }
+        }
+        
+        return result;
+    }
+
+*/

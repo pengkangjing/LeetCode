@@ -1,0 +1,123 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {                                 //看的答案 背了一遍
+        
+      int len1 =s1.length();
+      int len2 = s2.length();
+    if(len1>len2)
+        return false;
+     int[] count = new int[26];
+     for(int i=0;i<len1;i++){
+        count[s1.charAt(i)-'a']++;
+        count[s2.charAt(i)-'a']--;
+
+     }
+     if(allZero(count))
+         return true;
+     for(int i=len1;i<len2;i++){
+         count[s2.charAt(i)-'a']--;
+         count[s2.charAt(i-len1)-'a']++;
+         if(allZero(count))
+             return true;
+     }
+     return false;
+    }
+    private boolean allZero(int[] count){
+        for(int i=0;i<count.length;i++){
+            if(count[i]!=0)
+                return false;
+        }
+        return true;
+    }
+   
+    
+}
+
+/*
+ public boolean checkInclusion(String s1, String s2) {
+        
+        List<Character> list = new ArrayList<Character>();
+        for(int i=0;i<s1.length();i++)
+            list.add(s1.charAt(i));
+        
+        
+        for(int j=0;j<s2.length();){
+            
+            List<Character> temp = new ArrayList<Character>(){{addAll(list);}}; 
+            if(temp.contains(s2.charAt(j))){
+                
+                while((j<s2.length())&&(temp.contains(s2.charAt(j)))){
+                    temp.remove(temp.indexOf(s2.charAt(j)));
+                    if(temp.size()==0)
+                      return true;
+                    j++;
+                }
+                
+            }
+            else j++;
+            
+        }
+        return false;
+        
+    }
+*/
+
+/*
+
+ public boolean checkInclusion(String s1, String s2) {
+        
+        int first=0;
+        int second=0;
+        
+            for(int j=0;j<s2.length();j++){
+                
+                 if(s1.charAt(0)==s2.charAt(j)){
+                     
+                     int k=Math.max(0,j+1-s1.length());
+                     
+                     for(;k<=j;k++){
+                        int l=Math.min(s2.length(),k+s1.length()); 
+                         String s=s2.substring(k,l);
+                         if(check(s1,s))
+                             return true;
+                     }
+                                       
+                                    
+                }
+                
+                
+            }
+                 
+        return false;
+    }
+    public boolean check(String s1, String s2){
+        
+           if (s1.length()!=s2.length())
+               return false;
+            
+        
+        Map<Character,Integer> m=new HashMap<Character,Integer>();
+        for(int i=0;i<s1.length();i++){
+           if(m.containsKey(s1.charAt(i)))
+            m.put(s1.charAt(i),m.get(s1.charAt(i))+1);
+        else m.put(s1.charAt(i),1); 
+        }
+        
+            for( int j=0;j<s2.length();j++){
+                
+                if(!m.containsKey(s2.charAt(j)))
+                    return false;
+                else m.put((s2.charAt(j)),m.get(s2.charAt(j))-1);
+            }
+           
+        for(Integer i:m.values()){
+            if(i!=0){
+                System.out.println(i);
+                 return false;
+            }
+               
+        }
+        
+        return true;
+        }
+      
+*/

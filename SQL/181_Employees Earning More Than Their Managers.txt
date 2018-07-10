@@ -1,0 +1,8 @@
+# Write your MySQL query statement below
+#我的答案
+#SELECT name  AS Employee  FROM Employee as E1 where Salary>(SELECT Salary FROM Employee as E2 where Id=E1.ManagerId) 
+
+##答案
+#SELECT employer.name as  Employee
+#    FROM  Employee employer JOIN Employee manager ON (employer.ManagerId = manager.Id )
+#    where employer.salary>manager.salary

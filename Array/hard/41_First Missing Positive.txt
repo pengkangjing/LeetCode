@@ -1,0 +1,47 @@
+class Solution {
+   ublic int firstMissingPositive(int[] nums) {                   //这两个方法都是自己做的 开心
+        int len = nums.length;
+        if(len==0)                         //长度为0 返回1                       
+            return 1;
+        for(int i=0;i<len;i++){
+            if((nums[i]==(i+1))||(nums[i]>len))
+                continue;
+            if((nums[i]>0)&&(nums[i]<=len))
+                swap(i,nums[i]-1,nums);
+        }
+       
+        for(int j=0;j<len;j++){
+            if((nums[j]-1)!=j)       //如果某一个数缺失 直接返回该数
+                return j+1;
+        }
+        return len+1;               //否则返回 数组的长度加1
+    }
+    private void swap(int i,int j,int[] nums){
+        if(nums[i]==nums[j])                      //这一行 尤为关键 防止无限循环 交换
+            return ;
+        int temp = 0;
+        temp = nums[j];
+        nums[j]=nums[i];
+        nums[i]=temp;
+        if(((nums[i]-1)!=i)&&(nums[i]<=nums.length)&&(nums[i]>0))
+            swap(i,nums[i]-1,nums);
+    }
+    
+}
+/*
+
+     public int firstMissingPositive(int[] nums) {
+        int len = nums.length;
+        int[] temp = new int[len];                                //这个是非常量空间的
+        for(int i=0;i<nums.length;i++){
+            if((nums[i]>0)&&(nums[i]<=len)){
+                temp[nums[i]-1]=1;
+            }
+        }
+        for(int i=0;i<temp.length;i++){
+            if(temp[i]==0)
+                return i+1;
+        }
+        return len+1;
+    }
+*/

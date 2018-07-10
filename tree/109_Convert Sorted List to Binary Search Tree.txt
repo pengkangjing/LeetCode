@@ -1,0 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        TreeNode result;
+        if(head==null)
+            return null;
+        int len = 0;
+        ListNode temp=head;
+        while(temp!=null){
+            temp=temp.next;
+            len++;
+        }
+        int mid=len/2;
+        if(mid==0){                                     //左子树为空
+            
+            result=new TreeNode(head.val);  
+            result.left=null;
+            result.right=sortedListToBST(head.next);
+            return result;
+        }
+     
+        ListNode right_temp=head;
+        while(mid>1){                                  //找到分割左右子树的节点
+            right_temp=right_temp.next;
+            mid--;
+        }
+        result=new TreeNode(right_temp.next.val);  
+        result.right=sortedListToBST(right_temp.next.next);
+        right_temp.next=null;                                //构造左子树的链表 最后一个指向空
+        result.left=sortedListToBST(head);
+       
+        
+        
+        return result;
+    }
+}

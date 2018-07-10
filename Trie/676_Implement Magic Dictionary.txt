@@ -1,0 +1,86 @@
+class MagicDictionary {
+
+    /** Initialize your data structure here. */
+    private TreeNode root;
+    public MagicDictionary() {
+         root = new TreeNode();
+    }
+    private class TreeNode{
+        char val;
+        boolean isWord =false ;
+        TreeNode[] next ;
+        public TreeNode(){
+           this.next = new TreeNode[26]; 
+        }
+        public TreeNode(char c){
+            this.val = c;
+            this.next = new TreeNode[26];
+        }
+        
+    }
+    /** Build a dictionary through a list of words */
+    public void buildDict(String[] dict) {
+        
+        for(int i=0;i<dict.length;i++){
+            TreeNode p = root ;                                               //之前一直报错 只顾检查下面了 原来这行语句写在循环外面了 导致建立的
+            for(int j=0;j<dict[i].length();j++){                              //字典树是错误的   整了我这么久  基础不牢啊
+                
+                if(p.next[dict[i].charAt(j)-'a']==null)
+                    p.next[dict[i].charAt(j)-'a'] = new TreeNode(dict[i].charAt(j));
+                p = p.next[dict[i].charAt(j)-'a'];
+            }
+            p.isWord = true;
+            
+        }
+    }
+    
+    /** Returns if there is any word in the trie that equals to the given word after modifying exactly one character */
+    public boolean search(String word) {
+        
+        for(int i=0;i<word.length();i++){
+            TreeNode p = root;
+            int t=0;                                             //
+            while(t<i){
+                if(p.next[word.charAt(t)-'a']==null)             // 前面i个字母相同
+                break;
+                p=p.next[word.charAt(t)-'a'];
+                t++;                                            //
+            }
+            if(t<i)
+                continue;
+                
+            for(int j=25;j>=0;j--){
+               
+                if(j==(word.charAt(i)-'a')){                    //第i+1个字母替换
+                   
+                    continue;
+                }
+               
+                if((p.next[j]!=null)&&(find(p.next[j],word.substring(i+1)))){   //查找第i+2个字母以后是否匹配
+                   
+                        return true;
+                }
+                    
+            }
+        }
+        return false;
+    }
+    public boolean find(TreeNode p,String s){
+        
+        for(int i=0;i<s.length();i++){
+            if(p.next[s.charAt(i)-'a']==null)
+                return false;
+            p = p.next[s.charAt(i)-'a'];
+        }
+        if(p.isWord)
+            return true;
+        return false;
+    }
+}
+
+/**
+ * Your MagicDictionary object will be instantiated and called as such:
+ * MagicDictionary obj = new MagicDictionary();
+ * obj.buildDict(dict);
+ * boolean param_2 = obj.search(word);
+ */

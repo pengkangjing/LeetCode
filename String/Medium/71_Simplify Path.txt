@@ -1,0 +1,52 @@
+class Solution {
+    public String simplifyPath(String path) {                     //自己写的 有些乱
+        Stack<Character> st = new Stack<Character>();
+        for(int i=0;i<path.length();i++){
+            if(path.charAt(i)=='/'){                          //如果遇到了'/' 判断栈是否为空或者栈中最前面的那个是否不是'/' 处理'//'这种情况
+                if((st.isEmpty())||(st.peek()!='/'))          //当栈为空时 直接把'/'放进去
+                    st.push('/');
+            }
+            else if(path.charAt(i)=='.'){                     //如果为'.'
+                int count=0;                                  
+                while((i<path.length())&&(path.charAt(i)=='.')){  //计算后面总共有几个'.'
+                    count++;
+                    i++;
+                }
+                i--;                                              //修正i的位置 i指向最后一个'.'的索引
+                if(count==1){                                     //当有一个'.'时
+                    if((st.peek()=='/')&&((i==path.length()-1)||(path.charAt(i+1)=='/'))) //前面的必须为'/'且（'.'为最后一个字符或'.'后面是'/'）
+                        st.pop();                                                         //则把 前面的'/'弹出
+                    else st.push('.');           //否则 把 '.'压进栈
+                }
+                else if(count==2){               //当有2个'.' 时
+                      if((st.peek()=='/')&&((i==path.length()-1)||(path.charAt(i+1)=='/'))){
+                          st.pop();                                     //前面的必须为'/'且（'.'为最后一个字符或'.'后面是'/'）先把 前面的'/'弹出 
+                        if(!st.isEmpty()){                           //再弹出 一整个'/***'
+                           while(st.peek()!='/')
+                            st.pop();                              
+                           st.pop();                              //弹出'/'
+                        } 
+                      }
+                    else{                              //否则压进栈
+                        st.push('.');
+                        st.push('.');
+                    }
+                }
+                else {                                //'.'数量大于2 当做普通的字符 压进栈
+                    for(int j=0;j<count;j++)
+                        st.push('.');
+                }
+               
+            }
+            else st.push(path.charAt(i));            //普通字符压进栈
+        }
+        if((st.size()>1)&&(st.peek()=='/'))          //如果 以'/' 结尾 把'/'弹出
+            st.pop();
+        if(st.isEmpty())                             //如果 栈为空   补一个'/' 表示根目录 
+            return "/";
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty())      
+            sb.insert(0,st.pop());         //出栈逆序了 所以要插入在前面
+        return sb.toString();
+    }
+}

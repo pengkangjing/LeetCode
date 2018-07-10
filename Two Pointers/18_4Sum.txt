@@ -1,0 +1,49 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();                //自己半个月前 看过别人的答案  今天自己写的
+        Arrays.sort(nums);                                              //关键点在于 排序和 防止重复  减少比较次数
+        
+        for(int i=0;i<nums.length-3;i++){
+            if((i>0)&&(nums[i]==nums[i-1]))
+                continue;
+            for(int j=i+1;j<nums.length-2;j++){
+                if((j>i+1)&&(nums[j]==nums[j-1]))
+                    continue;
+                int temp = target-nums[i]-nums[j];
+                int lo=j+1;
+                int hi=nums.length-1;
+                while(lo<hi){
+                    
+                    if(nums[lo]+nums[hi]==temp){
+                        result.add(Arrays.asList(nums[i],nums[j],nums[lo],nums[hi]));
+                        while((lo<hi)&&(nums[lo]==nums[lo+1]))
+                            lo++;
+                        while((hi>lo)&&(nums[hi]==nums[hi-1]))
+                            hi--;
+                        lo++;
+                        hi--;
+                    }
+                    else if(nums[lo]+nums[hi]>temp){
+                        while((lo<hi)&&(nums[hi]==nums[hi-1]))
+                            hi--;
+                        hi--;
+                    }
+                    else{
+                        while((lo<hi)&&(nums[lo]==nums[lo+1]))
+                            lo++;
+                        lo++;
+                    }
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        return result;
+    }
+}

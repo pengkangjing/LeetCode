@@ -1,0 +1,22 @@
+class Solution {
+    public String removeKdigits(String num, int k) {
+        String result = num; 
+        if(num.length()==k)                                                //全部去掉返回0
+            return "0";
+        if(k==0)                                                           //直接返回
+            return result;
+        
+        while(k>0){                                                         //每次去掉一个数
+            
+            int i=0;
+            while((i<result.length()-1)&&(result.charAt(i)<=result.charAt(i+1))) //找到比左边都数都大且比右边的第一个数大的位置
+                i++;
+            result = result.substring(0,i)+result.substring(i+1);               //去掉这个位置的数
+          
+            k--;
+        }
+        while((result.charAt(0)=='0')&&(result.length()>1))        //去除前缀0
+            result=result.substring(1);
+        return result;
+    }
+}

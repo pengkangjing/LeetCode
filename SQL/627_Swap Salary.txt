@@ -1,0 +1,4 @@
+# Write your MySQL query statement below
+#UPDATE Person SET FirstName = 'Fred' WHERE LastName = 'Wilson'
+#自己的答案
+UPDATE salary SET sex = if(sex = 'm','f','m') 

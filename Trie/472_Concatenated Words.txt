@@ -1,0 +1,52 @@
+class Solution {
+    public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        List<String> result = new ArrayList<String>();                                  //看的答案 自己不会
+        
+        TreeNode root = new TreeNode();
+        
+        for(int i=0;i<words.length;i++){
+            TreeNode p = root;
+            for(int j=0;j<words[i].length();j++){
+                if(p.next[words[i].charAt(j)-'a']==null)
+                    p.next[words[i].charAt(j)-'a'] = new TreeNode();
+                p = p.next[words[i].charAt(j)-'a'];
+                
+            }
+            p.isWord = true;
+        }
+        
+        for(int i=0;i<words.length;i++){
+            
+            if(testWord(words[i],0,root,0)){
+                 result.add(words[i]);
+            }
+               
+        }
+        return result;
+    }
+    
+    private boolean testWord(String word,int index, TreeNode root,int count){     //关键在这里 用递归 深度优先搜索
+        TreeNode p =root;
+        for(int i=index;i<word.length();i++){
+            if(p.next[word.charAt(i)-'a']==null)
+                return false;
+            if(p.next[word.charAt(i)-'a'].isWord){                               //深度优先搜索
+                if(i==(word.length()-1))
+                    return count>=1;
+                if(testWord(word,i+1,root,count+1))
+                    return true;
+            }
+            p=p.next[word.charAt(i)-'a'];                                     // 如果catsdogcats 分成cat - sdogcats不行
+                                                                              //继续向下 cats-dogcat
+        }
+        return false;
+        
+    }
+    private class TreeNode{
+            boolean isWord = false;
+            TreeNode[] next = new TreeNode[26];
+            public TreeNode(){
+                
+            }
+        }
+}

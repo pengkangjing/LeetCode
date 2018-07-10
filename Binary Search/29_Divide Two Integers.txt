@@ -1,0 +1,76 @@
+class Solution {
+    public int divide(int dividend, int divisor) {                //这道题之前自己做了 没对  看的答案
+        long result=0;
+        int i=0;
+        int flag=0;
+        long ldividend =(long)dividend;                     //这里采用long是为了防止溢出
+        long ldivisor =(long)divisor;
+       
+        if(((ldividend>0)&&(ldivisor<0))||((ldividend<0)&&(ldivisor>0))){
+            flag=1;
+        }
+        
+        ldividend= Math.abs(ldividend);
+        ldivisor = Math.abs(ldivisor);
+         if((ldividend==0)||(ldividend<ldivisor))
+            return 0;
+        long temp = ldivisor;
+       
+         while(ldividend>=ldivisor){
+             ldivisor=ldivisor<<1;
+             i++;
+         }
+       
+        while(ldividend>=temp){
+            while((i>0)&&(ldividend<ldivisor)){
+                ldivisor=ldivisor>>1;
+                i--;
+            }
+          
+            if(ldividend<ldivisor)
+                break;
+            ldividend = ldividend-ldivisor;
+           
+            result = result + ((long)1<<i);     // 这里必须对1做类型转换，默认是把1当做int 所以之前就溢出了
+           
+        }
+      
+        if(flag==1)
+            return result>Integer.MAX_VALUE?Integer.MIN_VALUE:-(int)result;   //输出为int 必须做类型转换
+        return result>Integer.MAX_VALUE?Integer.MAX_VALUE:(int)result;        //输出为int 必须做类型转换
+    }
+}
+/*
+ public int divide(int dividend, int divisor) {
+        int result=0;
+        int flag=0;
+        if(dividend==-2147483648){
+            
+            if(divisor==-1)                                          //这题太头疼了 各种问题 溢出 正负号
+                return 
+            else if(divisor==1)
+        }
+            return Integer.MAX_VALUE;
+        if(((dividend<=0)&&(divisor>0))||((dividend>=0)&&(divisor<0)))
+            flag=1;
+        dividend=Math.abs(dividend);
+        divisor=Math.abs(divisor);
+        while(divisor<=dividend){
+            int temp=divisor;
+            int count=0;
+           // System.out.println(temp<<1);
+            while(temp<(dividend>>1)){
+                temp=temp<<1;
+                count++;
+            }
+            
+            result+=1<<count;
+                //System.out.println(result);
+            dividend-=temp;
+           // System.out.println(dividend);
+        }
+        if(flag==0)
+        return result;
+        else return -result;
+    }
+*/

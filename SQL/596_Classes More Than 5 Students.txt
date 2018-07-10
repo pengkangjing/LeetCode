@@ -1,0 +1,6 @@
+# Write your MySQL query statement below  #where COUNT(class)>=5 GROUP BY class  (SELECT class FROM courses)
+#自己写的
+SELECT class FROM (SELECT class,COUNT(DISTINCT student) as count_stu FROM courses  GROUP BY class)as pp WHERE count_stu>=5
+
+#答案
+#SELECT class  FROM courses  GROUP BY class having count(DISTINCT student)>=5

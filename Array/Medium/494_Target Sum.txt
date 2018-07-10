@@ -1,0 +1,41 @@
+class Solution {
+    public int findTargetSumWays(int[] nums, int S) {
+  
+        return find(nums,0,S);
+    }
+    private int find(int[] nums,int i,int S){                              //渣渣算法 太慢了
+        if(i==nums.length-1){
+            if((S==0)&&(nums[i]==0))    //如果最后的目标是0 且数组中的最后一个数就是0 那就有两种
+                return 2;
+            if((nums[i]==S)||(nums[i]==-S))
+                return 1;
+            else return 0;
+        }
+            
+       return  find(nums,i+1,S-nums[i])+find(nums,i+1,S+nums[i]);
+    }
+}
+class Solution {
+    public int findTargetSumWays(int[] nums, int S) {
+  
+        int sum = 0;
+        for(int i=0;i<nums.length;i++){ 
+            sum+=nums[i];
+        }
+        return sum<S||(sum+S)%2!=0 ? 0 : subSet(nums,(S+sum)>>>1);  //看的答案  转化为子集和问题 （动态规划）
+        
+    }
+    private int subSet(int[] nums,int S){
+        int[] dp = new int[S+1];
+        dp[0]=1;
+        for(int i=0;i<nums.length;i++){
+            for(int j=S;j>=nums[i];j--){
+                
+                dp[j]+=dp[j-nums[i]];
+                
+            }
+        }
+        return dp[S];
+    }
+   
+}

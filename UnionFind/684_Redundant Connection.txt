@@ -1,0 +1,26 @@
+class Solution {
+    public int[] findRedundantConnection(int[][] edges) {
+        int[] result=new int[2];
+        int[] temp=new int[edges.length];
+        for(int j=0;j<temp.length;j++){
+            temp[j]=j;
+        }
+        for(int i=0;i<edges.length;i++){
+            
+            if(temp[edges[i][0]-1]==temp[edges[i][1]-1]){
+                result[0]=edges[i][0];
+                result[1]=edges[i][1];
+                break;
+            }
+           else{
+               int num=temp[edges[i][0]-1];
+               for(int k=0;k<temp.length;k++){
+                   if(temp[k]==num)
+                       temp[k]=temp[edges[i][1]-1];      //这里要注意 我最开始写的 temp[k]=edges[i][1]-1 不行的 因为temp[edge[i][1]-1]可能
+               }                                         //之前被修改了 不等于edge[i][1]-1  所以出错了
+           }     
+            
+        }
+        return result;
+    }
+}

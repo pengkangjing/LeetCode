@@ -1,0 +1,33 @@
+class Solution {
+    public boolean validUtf8(int[] data) {
+        int len = data.length;
+        for(int i=0;i<len;i++){
+            int temp=data[i];
+            temp = (temp&255);
+            int count=0;                    //每个字节前面有几个1
+            while((temp&128)==128){         //碰到0 结束
+                count++;
+                temp=temp<<1;
+                
+            }
+            
+            if(count==0)                 //当count=0 这个utf-8 为一个字节 下面的不用检查了
+                continue;
+            
+            if((count==1)||(count>4))    //count 只能取2-4 看题目的说明
+                return false;
+            
+            
+            if((len-1-i)<count-1)         //剩余的字节数 要大于  需要的字节数
+                return false;
+            
+            while(count-->1){
+                i++;
+                
+                if(((data[i]>>6)^2)!=0)
+                    return false;
+            }
+        }
+        return true;
+    }
+}

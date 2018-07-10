@@ -1,0 +1,41 @@
+class Solution {
+    public int rangeBitwiseAnd(int m, int n) {
+                                                               //看的答案的思路 自己写的
+        int factor = 1; 
+        while(m!=n){               //只要它们不相等 就右移 直到相等 说明左边的都一样 m-n 范围内的数 只在移出的几个比特里变化 
+            m=m>>1;               //m右移                                                      //这几个比特上一定会有0 所以与操作之后为0
+            n=n>>1;               //n右移
+            factor=factor<<1;     //记录移了多少位
+        }
+        
+        return m*factor;
+        
+    }
+}
+/*
+public int rangeBitwiseAnd(int m, int n) {         //自己写的错的
+        if(m==0)
+            return 0;
+        if(m==n)
+            return m;
+        int m_left_bit=0;
+        int n_left_bit=0;
+        
+        int i=0;
+        while(i++<31){
+            m=m>>1;
+            if((m&1)==1)
+                m_left_bit=i;
+        }
+        int j=0;
+         while(j++<31){
+            n=n>>1;
+            if((n&1)==1)
+                n_left_bit=j;
+        }
+        if(m_left_bit==n_left_bit)
+            return 1<<n_left_bit;
+        return 0;
+        
+    }
+*/

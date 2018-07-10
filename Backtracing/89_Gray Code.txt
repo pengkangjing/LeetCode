@@ -1,0 +1,113 @@
+class Solution {
+    public List<Integer> grayCode(int n) {
+           List<Integer> result = new ArrayList<Integer>();          //这个是我看的答案，要写出这个答案必须对格雷码的构造非常熟悉，
+                                                                    //后面注释中是我自己写的三方法，虽然都A过了，但太慢了
+           result.add(0);
+           for(int j=0;j<n;j++){
+               int size=result.size();
+              for(int i=size-1;i>=0;i--){
+               result.add(result.get(i)|(1<<j));
+             }  
+           }
+          
+          
+          return result;
+           
+    }
+}
+/*
+public List<Integer> grayCode(int n) {
+           List<Integer> result = new ArrayList<Integer>();
+         
+           result.add(0);
+
+           while(result.size()<Math.pow(2,n)){
+               
+               int temp=result.get(result.size()-1);
+               for(int i=0;i<n;i++){
+                      
+                       if(!result.contains(temp^(1<<i))){
+                           result.add(temp^(1<<i));
+                           break;
+                       }
+               }
+               
+           }
+          return result;
+           
+    }
+public List<Integer> grayCode(int n) {
+           List<Integer> result = new ArrayList<Integer>();
+         
+           result.add(0);
+           int size=result.size();
+           while(size<Math.pow(2,n)){
+               
+               for(int i=0;i<n;i++){
+                  
+                       if(!result.contains(result.get(size-1)+(int)Math.pow(2,i))){
+                           
+                        if(Integer.bitCount(result.get(size-1)^(result.get(size-1)+(int)Math.pow(2,i)))==1){
+                         //   System.out.println(result.get(size-1)+(int)Math.pow(2,i)+"aaaa"); 
+                            result.add(result.get(size-1)+(int)Math.pow(2,i));
+                            size++;
+                            break; 
+                            
+                         }
+                           
+                      
+                      }
+                     if(!result.contains(result.get(size-1)-(int)Math.pow(2,i))){
+                         
+                         if(Integer.bitCount(result.get(size-1)^(result.get(size-1)-(int)Math.pow(2,i)))==1){
+                           // System.out.println(result.get(size-1)-(int)Math.pow(2,i)+"bbbb"); 
+                            result.add(result.get(size-1)-(int)Math.pow(2,i));
+                            size++;
+                            break; 
+                          }
+                           
+                       }
+               }
+               
+           }
+          return result;
+           
+    }
+ public List<Integer> grayCode(int n) {
+           List<Integer> result = new ArrayList<Integer>();
+           List<Integer> temp = new ArrayList<Integer>();
+           
+           for(int i=1;i<Math.pow(2,n);i++){
+             
+              temp.add(i); 
+               
+           }
+          // 这个答案是正确的 只不过判决系统只能判一个答案
+          //For example, [0,2,3,1] is also a valid gray code sequence according to the above definition.
+
+          //For now, the judge is able to judge based on one instance of gray code sequence. Sorry about that.
+        
+           result.add(0);
+           int size=result.size();
+          
+          while(size<Math.pow(2,n)){
+              
+              for(int j=0;j<temp.size();j++){
+                     //System.out.println(temp.get(j)^result.get(size-1));
+                     if(Integer.bitCount(temp.get(j)^result.get(size-1))==1){
+                         
+                         result.add(temp.get(j));
+                         size++;
+                         temp.remove(j);
+                         break;
+                         
+                     } 
+             }
+              
+          }
+          
+         return result;
+        
+           
+    }
+*/

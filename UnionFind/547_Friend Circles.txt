@@ -1,0 +1,57 @@
+class Solution {
+    public int findCircleNum(int[][] M) {
+        int len=M.length;
+       
+        int count=len;
+        int[] temp = new int[len];                    //用来保存哪些节点是属于一个friendcircle 
+        for(int i=0;i<len;i++){
+            temp[i]=i;
+        }
+        for(int j=0;j<len;j++){
+          
+          
+          for(int i=j+1;i<len;i++){ 
+              
+                    if(M[i][j]==1){
+                     
+                        if(temp[i]!=temp[j]){
+                            union(temp,i,j);
+                            count--;
+                        }
+     
+                        
+                    }
+                        
+                }
+    
+        }
+       
+        return count;
+       
+    }
+    private void union(int[] temp,int i,int j){
+        int flag=temp[i];
+        for(int k=0;k<temp.length;k++){
+            if(temp[k]==flag)
+                temp[k]=temp[j];
+        }
+    }
+}
+
+/*
+ int friendcircle=len;
+        int[] id = len;
+        for(int i=0;i<len;i++){
+            id[i]=i;
+        }
+        
+        
+        
+        
+for(int k=0;k<i;k++){
+             
+                    for(int j=0;j<len;j++){ 
+                    if(M[k][j]==1)
+                }
+            }  [[1,1,0,0],[1,1,1,0],[0,1,1,0],[0,0,0,1]]
+*/s

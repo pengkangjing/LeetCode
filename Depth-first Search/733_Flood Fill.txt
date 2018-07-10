@@ -1,0 +1,48 @@
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+      if((image.length==0)||(image[0].length==0)||(sr<0)||(sr>image.length)||(sc>image[0].length))   //看的答案的思路 自己敲的
+          return image;                                                                              //这个没有递归 不会栈溢出
+      if(image[sr][sc]==newColor)                                                                    //这里保证了不用额外的空间 visited[][]
+          return image;
+      int oldColor = image[sr][sc];
+      Queue<int[]> q = new LinkedList<int[]>();                                           //queue 是一个接口 不能实例化
+      q.offer(new int[]{sr,sc});                                                          // 用给定的数直接生成一个数组
+      while(!q.isEmpty()){
+          int[] temp = q.poll();
+          image[temp[0]][temp[1]]=newColor;
+          
+          if((temp[0]>0)&&(image[temp[0]-1][temp[1]]==oldColor))
+              q.offer(new int[]{temp[0]-1,temp[1]});
+          if((temp[0]<image.length-1)&&(image[temp[0]+1][temp[1]]==oldColor))
+              q.offer(new int[]{temp[0]+1,temp[1]});
+          if((temp[1]>0)&&(image[temp[0]][temp[1]-1]==oldColor))
+              q.offer(new int[]{temp[0],temp[1]-1});
+          if((temp[1]<image[0].length-1)&&(image[temp[0]][temp[1]+1]==oldColor))
+              q.offer(new int[]{temp[0],temp[1]+1});
+      }
+        return image;
+    }                                                               
+}
+/*
+public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+         if(image[sr][sc]==newColor) return image;                  // 加了这行 就可以保证不重复去 覆盖之前检查过了的
+        doFill(image,sr,sc,newColor,image[sr][sc]);                 //如果newColor=oldColor 就不用继续了 直接返回
+        return image;                                               //如果newColor！=oldColor 某个位置被覆盖成newColor之后
+    }                                                               //再处理该位置的相邻位置，该相邻位置的四周包括刚刚处理的位置 但它的值为newColor
+    public void doFill(int[][] image,int sr,int sc,int newColor,int oldColor){ //就不会再处理了 ！=oldColor
+       
+        image[sr][sc]=newColor;
+        if((sr>0)&&(image[sr-1][sc]==oldColor)){
+            doFill(image,sr-1,sc,newColor,oldColor);            //但这里仍然可能栈溢出
+        }
+        if((sr<image.length-1)&&(image[sr+1][sc]==oldColor)){
+             doFill(image,sr+1,sc,newColor,oldColor);
+        }
+        if((sc>0)&&(image[sr][sc-1]==oldColor)){
+            doFill(image,sr,sc-1,newColor,oldColor);
+        }
+        if((sc<image[0].length-1)&&(image[sr][sc+1]==oldColor)){
+             doFill(image,sr,sc+1,newColor,oldColor);
+        }
+    }
+*/

@@ -1,0 +1,34 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+           List<List<Integer>> result =  new ArrayList<List<Integer>>();
+          
+           for(int i=1;(i<n/k)&&(i<=9);i++){                                   //注意里面的条件
+              
+              List<Integer> item = new ArrayList<Integer>();
+            
+              process(result,item,n,k,i,0,0);
+               
+           }
+        return result;
+    }
+    private void process(List<List<Integer>> result,List<Integer> item,int n,int k,int i,int sum,int count){
+        item.add(i);
+        sum+=i;
+        count++;
+    
+        if((sum==n)&&(count==k)){                                                 //注意里面的条件
+            result.add(new ArrayList<Integer>(){{addAll(item);}} );                       
+        }
+        else if((sum<n)&&(count<k)){                                              //注意里面的条件
+            for(int j=i+1;(j<=9)&&(j<=(n-sum)/(k-count));j++){                     //注意里面的条件
+             
+                process(result,item,n,k,j,sum,count);
+                
+            }
+        }
+        item.remove(item.size()-1);
+        count--;
+        sum-=i;
+        
+    }
+}

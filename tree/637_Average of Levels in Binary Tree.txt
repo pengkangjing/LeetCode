@@ -1,0 +1,58 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> result = new ArrayList<Double>();                              //把类型Integer换成了Double 否则下面的sum会溢出
+       
+        if(root==null)
+            return result;
+        List<List<Double>> temp = levelOrder(root);
+        for(int i=0;i<temp.size();i++){
+            double sum=0;
+            for(int j=0;j<temp.get(i).size();j++)
+                sum+=temp.get(i).get(j);
+            result.add(sum/temp.get(i).size());
+        }
+       return result;
+            
+    }
+    private List<List<Double>> levelOrder(TreeNode root) {
+        List<List<Double>> result = new ArrayList<List<Double>>();                       //这个答案虽然通过了 但是空间复杂度很高
+        List<Double> temp = new ArrayList<Double>();
+        if(root==null)
+            return result;
+        if(root!=null){
+            temp.add((double)root.val);
+        }
+        result.add(temp);
+        
+        if((root.left==null)&&(root.right==null))
+            return result;
+        List<List<Double>> left = new ArrayList<List<Double>>();
+        List<List<Double>> right = new ArrayList<List<Double>>();
+        if(root.left!=null){
+            left=levelOrder(root.left);
+        }
+        if(root.right!=null){
+           right= levelOrder(root.right);
+        }
+        for(int i=0;i<Math.max(left.size(),right.size());i++){
+            List<Double> union = new ArrayList<Double>();
+            if(i<left.size())
+                union.addAll(left.get(i));
+            if(i<right.size())
+                union.addAll(right.get(i));
+            result.add(union); 
+        }
+        
+        return result;
+            
+    }
+}

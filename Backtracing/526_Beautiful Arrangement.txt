@@ -1,0 +1,51 @@
+class Solution {
+    private int count=0;
+    public int countArrangement(int N) {
+        
+        List<Integer> list = new ArrayList<Integer>();
+        
+        for(int i=1;i<=N;i++){
+            list.add(i);
+        }
+        
+        if(N==1)
+            return 1;
+        
+        for(int j=0;j<N;j++){
+            process(list,j,1);
+        }
+        
+        
+      
+      return count;  
+    }
+    private void process(List<Integer> list,int j,int k){
+        
+        
+         if(list.size()!=0){
+           
+            int temp=list.get(j);
+            list.remove(j);
+           
+            if(list.size()==0){
+                 count++;
+            }
+            else {
+                for(int l=0;l<list.size();l++){
+                
+                if((list.get(l)%(k+1)==0)||((k+1)%list.get(l)==0))
+                {
+                    process(list,l,k+1);
+              
+                }
+                
+              }
+            }
+            
+            
+            list.add(j,temp); 
+        }
+        
+        
+    }
+}

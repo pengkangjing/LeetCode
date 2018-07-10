@@ -1,0 +1,38 @@
+class Solution {
+    public int longestValidParentheses(String s) {
+        int maxLen = 0;
+        int left=0;
+        int right=0;
+        for(int i=0;i<s.length();i++){       //从左扫描 始终保持左括号大于右括号 
+            
+            if(s.charAt(i)=='(')
+                left++;
+            else right++;
+            
+            if(left==right){                              //如果左括号数等于右括号那一定是配对好了 因为下面的条件保证了这个
+                maxLen = Math.max(maxLen,left+right);
+            }
+            else if(left<right){                         //如果右括号大于左括号肯定不能配对了 则清0  保证上面的等于条件
+                left=0;
+                right=0;
+            }
+        }
+        left=0;
+        right=0;
+         for(int j=s.length()-1;j>=0;j--){             //为什么又要从右边扫一遍 是因为 可能左括号一直比右括号多 计算长度 是在 左右括号数相等的时候
+                                                       //如果 ((()) 这种情况 从左扫的话 长度为0 必须从 右 扫一遍  
+            if(s.charAt(j)=='(')                       //同样的道理 从右扫完之后 再从左扫    可以 识别 (())) 这种情况
+                left++;
+            else right++;
+            
+            if(left==right){
+                maxLen = Math.max(maxLen,left+right);
+            }
+            else if(left>right){
+                left=0;
+                right=0;
+            }
+        }
+        return maxLen;
+    }
+}
